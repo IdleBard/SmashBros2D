@@ -589,6 +589,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 6395903948659334770, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: maxGroudAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_RootOrder
       value: 1

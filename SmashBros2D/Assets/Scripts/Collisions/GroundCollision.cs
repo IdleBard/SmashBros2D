@@ -27,9 +27,9 @@ namespace smash_bros
 
         void Start()
         {
-            minLimitGround = Mathf.Sin(2 * Mathf.PI * maxGroudAngle / 180f);
-            maxLimitWall   = Mathf.Sin(2 * Mathf.PI * minWallAngle  / 180f);
-            minLimitWall   = Mathf.Sin(2 * Mathf.PI * maxWallAngle  / 180f);
+            minLimitGround = Mathf.Cos(Mathf.PI * maxGroudAngle / 180f);
+            maxLimitWall   = Mathf.Cos(Mathf.PI * minWallAngle  / 180f);
+            minLimitWall   = Mathf.Cos(Mathf.PI * maxWallAngle  / 180f);
         }
 
         private void OnCollisionExit2D(Collision2D collision)
