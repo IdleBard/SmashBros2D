@@ -10,10 +10,13 @@ namespace smash_bros
 
         // protected Vector2         velocity   ;
 
+        [Header("Jump Settings")]
         [SerializeField, Range(0f, 10f)] private float jumpHeight                 = 3f   ;
         [SerializeField, Range(0, 5)]    private int   maxAirJumps                = 0    ;
-        [SerializeField, Range(0f, 5f)]  private float downwardMovementMultiplier = 3f   ;
-        [SerializeField, Range(0f, 5f)]  private float upwardMovementMultiplier   = 1.7f ;
+
+        [Header("Gravity Multiplier Settings")]
+        [SerializeField, Range(0f, 5f)]  private float downGravityMultiplier = 3f   ;
+        [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 1.7f ;
 
         private int   jumpPhase           ;
         private float defaultGravityScale ;
@@ -54,11 +57,11 @@ namespace smash_bros
 
             if (body.velocity.y > 0)
             {
-                body.gravityScale = upwardMovementMultiplier;
+                body.gravityScale = upGravityMultiplier;
             }
             else if (body.velocity.y < 0)
             {
-                body.gravityScale = downwardMovementMultiplier;
+                body.gravityScale = downGravityMultiplier;
             }
             else if(body.velocity.y == 0)
             {
@@ -73,7 +76,8 @@ namespace smash_bros
             if (onGround || jumpPhase < maxAirJumps)
             {
                 jumpPhase += 1;
-                float jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
+                float jumpSpeed = Mathf.Sqrt(2f * upGravityMultiplier * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+                
                 if (velocity.y > 0f)
                 {
                     jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
@@ -82,6 +86,7 @@ namespace smash_bros
                 {
                     jumpSpeed += Mathf.Abs(body.velocity.y);
                 }
+                
                 velocity.y += jumpSpeed;
             }
         }

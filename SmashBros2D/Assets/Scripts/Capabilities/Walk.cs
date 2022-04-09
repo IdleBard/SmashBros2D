@@ -10,7 +10,7 @@ namespace smash_bros
 
         // protected Vector2         velocity   ;
 
-        [Header("Movement Settings")]
+        [Header("Walk Settings")]
         [SerializeField, Range(0f, 100f)] private float maxSpeed           = 4f  ;
         [SerializeField, Range(0f, 100f)] private float maxAcceleration    = 35f ;
         [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f ;
