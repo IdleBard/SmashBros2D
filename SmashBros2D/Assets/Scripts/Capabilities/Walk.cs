@@ -15,12 +15,18 @@ namespace smash_bros
         [SerializeField, Range(0f, 100f)] private float maxAcceleration    = 35f ;
         [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f ;
 
+        [Header("Wall Stick")]
+        [SerializeField, Range(0f, 1f)] private float maxTimeWallStick = .1f ;
+
+        private float timeWallStick;
+
         private Vector2 direction       ;
         private Vector2 desiredVelocity ;
         
         private float maxSpeedChange ;
         private float acceleration   ;
         private bool  onGround       ;
+        private bool  onWall         ;
 
         // Start is called before the first frame update
         // protected virtual void Awake()
@@ -39,13 +45,28 @@ namespace smash_bros
         private void FixedUpdate()
         {
             onGround = ground.GetOnGround();
+            onWall   = ground.GetOnWall();
+
             velocity = body.velocity;
 
             acceleration   = onGround ? maxAcceleration : maxAirAcceleration;
             maxSpeedChange = acceleration * Time.fixedDeltaTime;
             velocity.x     = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
-            body.velocity = velocity;
+            if (onWall)
+            {
+                if (timeWallStick < maxTimeWallStick)
+                {
+                    timeWallStick += Time.fixedDeltaTime;
+                    velocity.x = body.velocity.x;
+                }
+            }
+            else
+            {
+                timeWallStick = 0;
+            }
+
+            body.velocity = velocity ;
         }
     }
 }

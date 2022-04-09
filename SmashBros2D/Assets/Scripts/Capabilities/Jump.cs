@@ -60,8 +60,8 @@ namespace smash_bros
         {
             onGround    = ground.GetOnGround();
             onWall      = ground.GetOnWall();
-            onRightWall = ground.GetOnRightWall();
-            onLeftWall  = ground.GetOnLeftWall();
+            // onRightWall = ground.GetOnRightWall();
+            // onLeftWall  = ground.GetOnLeftWall();
             wallSide    = ground.GetWallSide();
 
             velocity = body.velocity;
