@@ -17,15 +17,17 @@ namespace smash_bros
         [SerializeField, Range(0, 10)]   private int   maxCoyoteTime         = 5    ;
         [SerializeField ]                private bool  enableWallJump        = true ;
         [SerializeField, Range(0f, 90f)] private float wallJumpAngle         = 45f  ;
+        [SerializeField, Range(1,  5)]   private int   maxWallJumps          = 1    ;
 
         [Header("Gravity Settings")]
         [SerializeField, Range(0f, 5f)]  private float defaultGravityScale   = 1f ;
         [SerializeField, Range(0f, 5f)]  private float fallGravityMultiplier = 3f ;
         [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 2f ;
         
-        private int  jumpPhase   ;
-        private int  jumpBuffer  ;
-        private int  coyoteTime  ;
+        private int  jumpPhase     ;
+        private int  jumpBuffer    ;
+        private int  coyoteTime    ;
+        private int  wallJumpPhase ;
 
         // Collision bool
         private bool onGround    ;
@@ -33,6 +35,7 @@ namespace smash_bros
         private bool onRightWall ;
         private bool onLeftWall  ;
         private int  wallSide    ;
+        private int  oldWallSide ;
 
 
         // Input Bool
@@ -60,9 +63,14 @@ namespace smash_bros
         {
             onGround    = ground.GetOnGround();
             onWall      = ground.GetOnWall();
-            // onRightWall = ground.GetOnRightWall();
-            // onLeftWall  = ground.GetOnLeftWall();
+
+            oldWallSide = wallSide;
             wallSide    = ground.GetWallSide();
+
+            if (onWall && wallSide != oldWallSide)
+            {
+                wallJumpPhase = 0;
+            }
 
             velocity = body.velocity;
 
@@ -73,9 +81,10 @@ namespace smash_bros
 
             if (onGround)
             {
-                jumpPhase  = 0;
-                jumpBuffer = 0;
-                coyoteTime = 0;
+                jumpPhase     = 0;
+                jumpBuffer    = 0;
+                coyoteTime    = 0;
+                wallJumpPhase = 0;
             }
             else
             {
@@ -145,10 +154,15 @@ namespace smash_bros
 
         private void WallJumpAction()
         {
-            float wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
-            Vector2 direction = new Vector2 (wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
+            if (wallJumpPhase < maxWallJumps)
+            {
+                wallJumpPhase += 1;
+                
+                float wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
+                Vector2 direction = new Vector2 (wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
 
-            JumpAction(direction);
+                JumpAction(direction);
+            }
         }
     }
 }
