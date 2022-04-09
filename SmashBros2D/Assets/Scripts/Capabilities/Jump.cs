@@ -11,19 +11,24 @@ namespace smash_bros
         // protected Vector2         velocity   ;
 
         [Header("Jump Settings")]
-        [SerializeField, Range(0f, 10f)] private float jumpHeight                 = 3f   ;
-        [SerializeField, Range(0, 5)]    private int   maxAirJumps                = 0    ;
+        [SerializeField, Range(0f, 10f)] private float jumpHeight            = 3f ;
+        [SerializeField, Range(0,  5)]   private int   maxAirJumps           = 0  ;
+        [SerializeField, Range(0, 10)]   private int   maxJumpBuffer         = 5  ;
 
-        [Header("Gravity Multiplier Settings")]
+        [Header("Gravity Settings")]
         [SerializeField, Range(0f, 5f)]  private float defaultGravityScale   = 1f ;
         [SerializeField, Range(0f, 5f)]  private float fallGravityMultiplier = 3f ;
         [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 2f ;
+        
 
         private int  jumpPhase   ;
+        private int  jumpBuffer  ;
 
-        private bool desiredJump    ;
-        private bool holdJumpButton ;
         private bool onGround       ;
+        private bool holdJumpButton ;
+        private bool desiredJump    ;
+        
+        
 
 
         // Start is called before the first frame update
@@ -49,13 +54,28 @@ namespace smash_bros
 
             if (onGround)
             {
-                jumpPhase = 0;
+                jumpPhase  = 0;
+                jumpBuffer = 0;
             }
 
             if (desiredJump)
-            {
-                desiredJump = false;
-                JumpAction();
+            {   
+                
+                if (onGround || jumpPhase < maxAirJumps)
+                {
+                    desiredJump = false;
+                    JumpAction();
+                }
+                else if (jumpBuffer < maxJumpBuffer)
+                {
+                    jumpBuffer += 1;
+                    desiredJump = true;
+                }
+                else
+                {
+                    desiredJump = false;
+                }
+                
             }
 
             // Improve Jump
@@ -77,22 +97,19 @@ namespace smash_bros
 
         private void JumpAction()
         {
-            if (onGround || jumpPhase < maxAirJumps)
+            jumpPhase += 1;
+            float jumpSpeed = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+            
+            if (velocity.y > 0f)
             {
-                jumpPhase += 1;
-                float jumpSpeed = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
-                
-                if (velocity.y > 0f)
-                {
-                    jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
-                }
-                else if (velocity.y < 0f)
-                {
-                    jumpSpeed += Mathf.Abs(body.velocity.y);
-                }
-                
-                velocity.y += jumpSpeed;
+                jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
             }
+            else if (velocity.y < 0f)
+            {
+                jumpSpeed += Mathf.Abs(body.velocity.y);
+            }
+            
+            velocity.y += jumpSpeed;
         }
     }
 }
