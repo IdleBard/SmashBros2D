@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace smashbros
+namespace smash_bros
 {
     [CreateAssetMenu(fileName = "AIController", menuName = "InputController/AIController")]
     public class AIController : InputController

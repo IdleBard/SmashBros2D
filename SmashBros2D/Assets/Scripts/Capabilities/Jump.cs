@@ -1,33 +1,28 @@
 using UnityEngine;
 
-namespace smashbros
+namespace smash_bros
 {
-    [RequireComponent(typeof(Controller))]
-    public class Jump : MonoBehaviour
+    public class Jump : PlayerMovement
     {
-        [SerializeField, Range(0f, 10f)] private float jumpHeight = 3f;
-        [SerializeField, Range(0, 5)] private int maxAirJumps = 0;
-        [SerializeField, Range(0f, 5f)] private float downwardMovementMultiplier = 3f;
-        [SerializeField, Range(0f, 5f)] private float upwardMovementMultiplier = 1.7f;
+        [SerializeField, Range(0f, 10f)] private float jumpHeight                 = 3f   ;
+        [SerializeField, Range(0, 5)]    private int   maxAirJumps                = 0    ;
+        [SerializeField, Range(0f, 5f)]  private float downwardMovementMultiplier = 3f   ;
+        [SerializeField, Range(0f, 5f)]  private float upwardMovementMultiplier   = 1.7f ;
 
-        private Controller controller;
-        private Rigidbody2D body;
-        private GroundCollision ground;
-        private Vector2 velocity;
+        private int   jumpPhase           ;
+        private float defaultGravityScale ;
 
-        private int jumpPhase;
-        private float defaultGravityScale;
-
-        private bool desiredJump;
-        private bool onGround;
+        private bool desiredJump ;
+        private bool onGround    ;
 
 
         // Start is called before the first frame update
-        void Awake()
+        protected override void Awake()
         {
-            body = GetComponent<Rigidbody2D>();
-            ground = GetComponent<GroundCollision>();
-            controller = GetComponent<Controller>();
+            // body       = GetComponent<Rigidbody2D>();
+            // ground     = GetComponent<GroundCollision>();
+            // controller = GetComponent<Controller>();
+            base.Awake();
 
             defaultGravityScale = 1f;
         }
@@ -69,6 +64,7 @@ namespace smashbros
 
             body.velocity = velocity;
         }
+
         private void JumpAction()
         {
             if (onGround || jumpPhase < maxAirJumps)
