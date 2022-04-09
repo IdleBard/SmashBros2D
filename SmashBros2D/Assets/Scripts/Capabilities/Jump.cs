@@ -15,30 +15,33 @@ namespace smash_bros
         [SerializeField, Range(0, 5)]    private int   maxAirJumps                = 0    ;
 
         [Header("Gravity Multiplier Settings")]
-        [SerializeField, Range(0f, 5f)]  private float downGravityMultiplier = 3f   ;
-        [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 1.7f ;
+        [SerializeField, Range(0f, 5f)]  private float defaultGravityScale   = 1f ;
+        [SerializeField, Range(0f, 5f)]  private float fallGravityMultiplier = 3f ;
+        [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 2f ;
 
-        private int   jumpPhase           ;
-        private float defaultGravityScale ;
+        private int  jumpPhase   ;
 
-        private bool desiredJump ;
-        private bool onGround    ;
+        private bool desiredJump    ;
+        private bool holdJumpButton ;
+        private bool onGround       ;
 
 
         // Start is called before the first frame update
-        protected override void Awake()
-        {
-            base.Awake();
-
-            defaultGravityScale = 1f;
-        }
+        // protected virtual void Awake()
+        // {
+        //     body       = GetComponent<Rigidbody2D>();
+        //     ground     = GetComponent<GroundCollision>();
+        //     controller = GetComponent<Controller>();
+        // }
 
         // Update is called once per frame
         void Update()
         {
-            desiredJump |= controller.input.RetrieveJumpInput();
+            desiredJump   |= controller.input.RetrieveJumpInput();
+            holdJumpButton = controller.input.RetrieveHoldJumpInput();
         }
 
+        // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
             onGround = ground.GetOnGround();
@@ -55,15 +58,16 @@ namespace smash_bros
                 JumpAction();
             }
 
-            if (body.velocity.y > 0)
+            // Improve Jump
+            if (body.velocity.y < 0) // Faster Falling
             {
-                body.gravityScale = upGravityMultiplier;
+                body.gravityScale = defaultGravityScale * fallGravityMultiplier;
             }
-            else if (body.velocity.y < 0)
+            else if (body.velocity.y > 0 && !holdJumpButton) // Low Jump
             {
-                body.gravityScale = downGravityMultiplier;
+                body.gravityScale = defaultGravityScale * upGravityMultiplier;
             }
-            else if(body.velocity.y == 0)
+            else
             {
                 body.gravityScale = defaultGravityScale;
             }
@@ -76,7 +80,7 @@ namespace smash_bros
             if (onGround || jumpPhase < maxAirJumps)
             {
                 jumpPhase += 1;
-                float jumpSpeed = Mathf.Sqrt(2f * upGravityMultiplier * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+                float jumpSpeed = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
                 
                 if (velocity.y > 0f)
                 {

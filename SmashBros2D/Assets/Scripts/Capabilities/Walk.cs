@@ -22,7 +22,8 @@ namespace smash_bros
         private float acceleration   ;
         private bool  onGround       ;
 
-        // private void Awake()
+        // Start is called before the first frame update
+        // protected virtual void Awake()
         // {
         //     body       = GetComponent<Rigidbody2D>();
         //     ground     = GetComponent<GroundCollision>();
