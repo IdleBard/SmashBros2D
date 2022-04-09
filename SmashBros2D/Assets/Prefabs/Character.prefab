@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37990437655cf243b450eed31d2d746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGroudAngle: 60
+  maxGroudAngle: 70
   minWallAngle: 75
   maxWallAngle: 90
   uncertainty: 0.1
