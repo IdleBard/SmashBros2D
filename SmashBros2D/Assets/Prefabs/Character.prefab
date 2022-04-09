@@ -285,6 +285,7 @@ MonoBehaviour:
   maxSpeed: 10
   maxAcceleration: 35
   maxAirAcceleration: 35
+  maxTimeWallStick: 0.1
 --- !u!114 &6395903948659334769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   maxCoyoteTime: 5
   enableWallJump: 1
   wallJumpAngle: 45
+  maxWallJumps: 1
   defaultGravityScale: 1
   fallGravityMultiplier: 3
   upGravityMultiplier: 2
@@ -318,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37990437655cf243b450eed31d2d746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  collisionRadius: 0.25
+  maxGroudAngle: 60
+  minWallAngle: 75
+  maxWallAngle: 90
+  uncertainty: 0.1

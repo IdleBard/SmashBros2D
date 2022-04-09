@@ -2,20 +2,16 @@ using UnityEngine;
 
 namespace smash_bros
 {
-    [RequireComponent(typeof(BoxCollider2D))]
     public class GroundCollision : MonoBehaviour
     {
-        [Header("Layers")]
-        public LayerMask groundLayer;
+        // [Header("Layers")]
+        // public LayerMask groundLayer;
 
         [Header("Collision Settings")]
-        public  float   collisionRadius = 0.25f;
-
-        // [Header("Debug Settings")]
-        private Color debugCollisionColor = Color.red;
-
-        private BoxCollider2D box;
-        private Vector2 bottomOffset, rightOffset, leftOffset;
+        [SerializeField, Range(0f, 90f)] private float maxGroudAngle  = 60f  ;
+        [SerializeField, Range(0f, 90f)] private float minWallAngle   = 75f  ;
+        [SerializeField, Range(0f, 90f)] private float maxWallAngle   = 90f  ;
+        [SerializeField, Range(0f, 1f)]  private float uncertainty    =  .1f ;
 
         private bool onGround    ;
         private bool onWall      ;
@@ -23,18 +19,17 @@ namespace smash_bros
         private bool onLeftWall  ;
         private int  wallSide    ;
 
-        private float friction;
+        private float minLimitGround ;
+        private float minLimitWall   ;
+        private float maxLimitWall   ;
 
-        void Awake()
-        {
-            box = GetComponent<BoxCollider2D>();
-        }
+        private float friction;
 
         void Start()
         {
-            bottomOffset = new Vector2( 0, -box.size.y / 2 );
-            rightOffset  = new Vector2(  box.size.x / 2, 0 );
-            leftOffset   = new Vector2( -box.size.x / 2, 0 );
+            minLimitGround = Mathf.Sin(2 * Mathf.PI * maxGroudAngle / 180f);
+            maxLimitWall   = Mathf.Sin(2 * Mathf.PI * minWallAngle  / 180f);
+            minLimitWall   = Mathf.Sin(2 * Mathf.PI * maxWallAngle  / 180f);
         }
 
         private void OnCollisionExit2D(Collision2D collision)
@@ -49,23 +44,29 @@ namespace smash_bros
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            EvaluateCollision();
+            EvaluateCollision(collision);
             RetrieveFriction(collision);
         }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
-            EvaluateCollision();
+            EvaluateCollision(collision);
             RetrieveFriction(collision);
         }
 
-        private void EvaluateCollision()
+        private void EvaluateCollision(Collision2D collision)
         {
-            onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-            onWall   = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer) || Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
+            for (int i = 0; i < collision.contactCount; i++)
+            {
+                Vector2 normal = collision.GetContact(i).normal;
 
-            onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-            onLeftWall  = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
+                onGround |= normal.y  >= (minLimitGround - uncertainty) ;
+                onWall   |= (normal.y >= (minLimitWall   - uncertainty) && normal.y < (maxLimitWall + uncertainty));
+
+                onRightWall |= (onWall && normal.x < 0);
+                onLeftWall  |= (onWall && normal.x > 0);
+
+            }
 
             wallSide = onRightWall ? -1 : 1;
         }
@@ -112,19 +113,6 @@ namespace smash_bros
         public float GetFriction()
         {
             return friction;
-        }
-
-
-        // Debug
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            var positions = new Vector2[] { bottomOffset, rightOffset, leftOffset };
-
-            Gizmos.DrawWireSphere((Vector2)transform.position  + bottomOffset, collisionRadius);
-            Gizmos.DrawWireSphere((Vector2)transform.position  + rightOffset, collisionRadius);
-            Gizmos.DrawWireSphere((Vector2)transform.position  + leftOffset, collisionRadius);
         }
     }
 }
