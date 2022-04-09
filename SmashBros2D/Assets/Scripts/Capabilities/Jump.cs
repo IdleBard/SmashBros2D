@@ -54,6 +54,7 @@ namespace smash_bros
         // Update is called once per frame
         void Update()
         {
+            animator.SetBool("isJumping", !onGround);
             desiredJump   |= controller.input.RetrieveJumpInput();
             holdJumpButton = controller.input.RetrieveHoldJumpInput();
         }

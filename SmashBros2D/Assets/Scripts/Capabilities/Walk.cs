@@ -38,8 +38,10 @@ namespace smash_bros
 
         private void Update()
         {
+            animator.SetFloat("Speed", Mathf.Abs(velocity.x));
             direction.x     = controller.input.RetrieveMoveInput();
             desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
+
         }
 
         private void FixedUpdate()
@@ -67,6 +69,16 @@ namespace smash_bros
             }
 
             body.velocity = velocity ;
+
+            if (velocity.x > 0f)
+            {
+                renderer.flipX = true;
+            }
+            else if (velocity.x < 0f)
+            {
+                renderer.flipX = false;
+            }
+            
         }
     }
 }

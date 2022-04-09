@@ -8,6 +8,8 @@ namespace smash_bros
         protected Controller      controller ;
         protected Rigidbody2D     body       ;
         protected GroundCollision ground     ;
+        protected Animator        animator   ;
+        protected SpriteRenderer  renderer   ;
 
         protected Vector2         velocity   ;
 
@@ -17,6 +19,8 @@ namespace smash_bros
             body       = GetComponent<Rigidbody2D>();
             ground     = GetComponent<GroundCollision>();
             controller = GetComponent<Controller>();
+            animator   = GetComponent<Animator>();
+            renderer   = GetComponent<SpriteRenderer>();
         }
 
     }
