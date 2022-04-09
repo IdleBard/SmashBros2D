@@ -2,8 +2,15 @@ using UnityEngine;
 
 namespace smash_bros
 {
-    public class Move : PlayerMovement
+    public class Walk : PlayerMovement
     {
+        // protected Controller      controller ;
+        // protected Rigidbody2D     body       ;
+        // protected GroundCollision ground     ;
+
+        // protected Vector2         velocity   ;
+
+        [Header("Movement Settings")]
         [SerializeField, Range(0f, 100f)] private float maxSpeed           = 4f  ;
         [SerializeField, Range(0f, 100f)] private float maxAcceleration    = 35f ;
         [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f ;
@@ -34,7 +41,7 @@ namespace smash_bros
             velocity = body.velocity;
 
             acceleration   = onGround ? maxAcceleration : maxAirAcceleration;
-            maxSpeedChange = acceleration * Time.deltaTime;
+            maxSpeedChange = acceleration * Time.fixedDeltaTime;
             velocity.x     = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
             body.velocity = velocity;

@@ -4,6 +4,12 @@ namespace smash_bros
 {
     public class Jump : PlayerMovement
     {
+        // protected Controller      controller ;
+        // protected Rigidbody2D     body       ;
+        // protected GroundCollision ground     ;
+
+        // protected Vector2         velocity   ;
+
         [SerializeField, Range(0f, 10f)] private float jumpHeight                 = 3f   ;
         [SerializeField, Range(0, 5)]    private int   maxAirJumps                = 0    ;
         [SerializeField, Range(0f, 5f)]  private float downwardMovementMultiplier = 3f   ;
@@ -19,9 +25,6 @@ namespace smash_bros
         // Start is called before the first frame update
         protected override void Awake()
         {
-            // body       = GetComponent<Rigidbody2D>();
-            // ground     = GetComponent<GroundCollision>();
-            // controller = GetComponent<Controller>();
             base.Awake();
 
             defaultGravityScale = 1f;
