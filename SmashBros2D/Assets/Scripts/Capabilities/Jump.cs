@@ -11,22 +11,31 @@ namespace smash_bros
         // protected Vector2         velocity   ;
 
         [Header("Jump Settings")]
-        [SerializeField, Range(0f, 10f)] private float jumpHeight            = 3f ;
-        [SerializeField, Range(0,  5)]   private int   maxAirJumps           = 0  ;
-        [SerializeField, Range(0, 10)]   private int   maxJumpBuffer         = 5  ;
-        [SerializeField, Range(0, 10)]   private int   maxCoyoteTime         = 5  ;
+        [SerializeField, Range(0f, 10f)] private float jumpHeight            = 3f   ;
+        [SerializeField, Range(0,  5)]   private int   maxAirJumps           = 0    ;
+        [SerializeField, Range(0, 10)]   private int   maxJumpBuffer         = 5    ;
+        [SerializeField, Range(0, 10)]   private int   maxCoyoteTime         = 5    ;
+        [SerializeField ]                private bool  enableWallJump        = true ;
+        [SerializeField, Range(0f, 90f)] private float wallJumpAngle         = 45f  ;
 
         [Header("Gravity Settings")]
         [SerializeField, Range(0f, 5f)]  private float defaultGravityScale   = 1f ;
         [SerializeField, Range(0f, 5f)]  private float fallGravityMultiplier = 3f ;
         [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 2f ;
         
-
         private int  jumpPhase   ;
         private int  jumpBuffer  ;
         private int  coyoteTime  ;
 
-        private bool onGround       ;
+        // Collision bool
+        private bool onGround    ;
+        private bool onWall      ;
+        private bool onRightWall ;
+        private bool onLeftWall  ;
+        private int  wallSide    ;
+
+
+        // Input Bool
         private bool holdJumpButton ;
         private bool desiredJump    ;
 
@@ -49,8 +58,18 @@ namespace smash_bros
         // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
-            onGround = ground.GetOnGround();
+            onGround    = ground.GetOnGround();
+            onWall      = ground.GetOnWall();
+            onRightWall = ground.GetOnRightWall();
+            onLeftWall  = ground.GetOnLeftWall();
+            wallSide    = ground.GetWallSide();
+
             velocity = body.velocity;
+
+            // if (onWall)
+            // {
+            //     Debug.Log("onRightWall : " + onRightWall + ", onLeftWall : " + onLeftWall + ", wallSide :" + wallSide);
+            // }
 
             if (onGround)
             {
@@ -69,7 +88,12 @@ namespace smash_bros
                 if (onGround || jumpPhase < maxAirJumps || coyoteTime < maxCoyoteTime)
                 {
                     desiredJump = false;
-                    JumpAction();
+                    JumpAction(Vector2.up);
+                }
+                else if(enableWallJump && onWall)
+                {   
+                    desiredJump = false;
+                    WallJumpAction();
                 }
                 else if (jumpBuffer < maxJumpBuffer)
                 {
@@ -100,21 +124,31 @@ namespace smash_bros
             body.velocity = velocity;
         }
 
-        private void JumpAction()
+        private void JumpAction(Vector2 direction)
         {
             jumpPhase += 1;
-            float jumpSpeed = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+            
+            float   jumpSpeed    = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+            Vector2 jumpVelocity = direction * jumpSpeed;
             
             if (velocity.y > 0f)
             {
-                jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
+                jumpVelocity.y = Mathf.Max(jumpVelocity.y - velocity.y, 0f);
             }
             else if (velocity.y < 0f)
             {
-                jumpSpeed += Mathf.Abs(body.velocity.y);
+                jumpVelocity.y += Mathf.Abs(body.velocity.y);
             }
             
-            velocity.y += jumpSpeed;
+            velocity += jumpVelocity;
+        }
+
+        private void WallJumpAction()
+        {
+            float wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
+            Vector2 direction = new Vector2 (wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
+
+            JumpAction(direction);
         }
     }
 }

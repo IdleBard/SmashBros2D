@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7620947200569518814}
   - component: {fileID: 6395903948659334769}
   - component: {fileID: 6395903948659334770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 0.14899999, b: 0.14899999, a: 1}
+  m_Color: {r: 0.98039216, g: 0.96862745, b: 0.49019608, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -299,6 +299,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 6
   maxAirJumps: 0
+  maxJumpBuffer: 5
+  maxCoyoteTime: 5
+  enableWallJump: 1
+  wallJumpAngle: 45
   defaultGravityScale: 1
   fallGravityMultiplier: 3
   upGravityMultiplier: 2
@@ -314,3 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37990437655cf243b450eed31d2d746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  collisionRadius: 0.25
