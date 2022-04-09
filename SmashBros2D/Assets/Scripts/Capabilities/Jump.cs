@@ -14,6 +14,7 @@ namespace smash_bros
         [SerializeField, Range(0f, 10f)] private float jumpHeight            = 3f ;
         [SerializeField, Range(0,  5)]   private int   maxAirJumps           = 0  ;
         [SerializeField, Range(0, 10)]   private int   maxJumpBuffer         = 5  ;
+        [SerializeField, Range(0, 10)]   private int   maxCoyoteTime         = 5  ;
 
         [Header("Gravity Settings")]
         [SerializeField, Range(0f, 5f)]  private float defaultGravityScale   = 1f ;
@@ -23,12 +24,11 @@ namespace smash_bros
 
         private int  jumpPhase   ;
         private int  jumpBuffer  ;
+        private int  coyoteTime  ;
 
         private bool onGround       ;
         private bool holdJumpButton ;
         private bool desiredJump    ;
-        
-        
 
 
         // Start is called before the first frame update
@@ -56,12 +56,17 @@ namespace smash_bros
             {
                 jumpPhase  = 0;
                 jumpBuffer = 0;
+                coyoteTime = 0;
+            }
+            else
+            {
+                coyoteTime += 1;
             }
 
             if (desiredJump)
             {   
                 
-                if (onGround || jumpPhase < maxAirJumps)
+                if (onGround || jumpPhase < maxAirJumps || coyoteTime < maxCoyoteTime)
                 {
                     desiredJump = false;
                     JumpAction();
