@@ -589,10 +589,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 6395903948659334770, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: maxGroudAngle
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -636,6 +632,10 @@ PrefabInstance:
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620947200569518814, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: maxAcceleration
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}

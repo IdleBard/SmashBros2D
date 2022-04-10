@@ -2,13 +2,8 @@ using UnityEngine;
 
 namespace smash_bros
 {
-    public class Jump : PlayerMovement
+    public class Jump : Movement
     {
-        // protected Controller      controller ;
-        // protected Rigidbody2D     body       ;
-        // protected GroundCollision ground     ;
-
-        // protected Vector2         velocity   ;
 
         [Header("Jump Settings")]
         [SerializeField, Range(0f, 10f)] private float jumpHeight            = 3f   ;
@@ -30,11 +25,11 @@ namespace smash_bros
         private int  wallJumpPhase ;
 
         // Collision bool
-        private bool onGround    ;
-        private bool onWall      ;
-        private bool onRightWall ;
-        private bool onLeftWall  ;
-        private int  wallSide    ;
+        // private bool onGround    ;
+        // private bool onWall      ;
+        // private bool onRightWall ;
+        // private bool onLeftWall  ;
+        // private int  wallSide    ;
         private int  oldWallSide ;
 
 
@@ -42,44 +37,27 @@ namespace smash_bros
         private bool holdJumpButton ;
         private bool desiredJump    ;
 
-
-        // Start is called before the first frame update
-        // protected virtual void Awake()
-        // {
-        //     body       = GetComponent<Rigidbody2D>();
-        //     ground     = GetComponent<GroundCollision>();
-        //     controller = GetComponent<Controller>();
-        // }
-
         // Update is called once per frame
         void Update()
         {
-            desiredJump   |= controller.input.RetrieveJumpInput();
-            holdJumpButton = controller.input.RetrieveHoldJumpInput();
+            desiredJump   |= manager.input.RetrieveJumpInput();
+            holdJumpButton = manager.input.RetrieveHoldJumpInput();
         }
 
         // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
-            onGround    = ground.GetOnGround();
-            onWall      = ground.GetOnWall();
 
-            oldWallSide = wallSide;
-            wallSide    = ground.GetWallSide();
-
-            if (onWall && wallSide != oldWallSide)
+            if (manager.onWall && manager.wallSide != oldWallSide)
             {
                 wallJumpPhase = 0;
             }
 
-            velocity = body.velocity;
+            oldWallSide = manager.wallSide;          
 
-            // if (onWall)
-            // {
-            //     Debug.Log("onRightWall : " + onRightWall + ", onLeftWall : " + onLeftWall + ", wallSide :" + wallSide);
-            // }
+            velocity = manager.body.velocity;
 
-            if (onGround)
+            if (manager.onGround)
             {
                 jumpPhase     = 0;
                 jumpBuffer    = 0;
@@ -94,12 +72,12 @@ namespace smash_bros
             if (desiredJump)
             {   
                 
-                if (onGround || jumpPhase < maxAirJumps || coyoteTime < maxCoyoteTime)
+                if (manager.onGround || jumpPhase < maxAirJumps || coyoteTime < maxCoyoteTime)
                 {
                     desiredJump = false;
                     JumpAction(Vector2.up);
                 }
-                else if(enableWallJump && onWall)
+                else if(enableWallJump && manager.onWall)
                 {   
                     desiredJump = false;
                     WallJumpAction();
@@ -117,20 +95,20 @@ namespace smash_bros
             }
 
             // Improve Jump
-            if (body.velocity.y < 0) // Faster Falling
+            if (manager.body.velocity.y < 0) // Faster Falling
             {
-                body.gravityScale = defaultGravityScale * fallGravityMultiplier;
+                manager.body.gravityScale = defaultGravityScale * fallGravityMultiplier;
             }
-            else if (body.velocity.y > 0 && !holdJumpButton) // Low Jump
+            else if (manager.body.velocity.y > 0 && !holdJumpButton) // Low Jump
             {
-                body.gravityScale = defaultGravityScale * upGravityMultiplier;
+                manager.body.gravityScale = defaultGravityScale * upGravityMultiplier;
             }
             else
             {
-                body.gravityScale = defaultGravityScale;
+                manager.body.gravityScale = defaultGravityScale;
             }
 
-            body.velocity = velocity;
+            manager.body.velocity = velocity;
         }
 
         private void JumpAction(Vector2 direction)
@@ -146,7 +124,7 @@ namespace smash_bros
             }
             else if (velocity.y < 0f)
             {
-                jumpVelocity.y += Mathf.Abs(body.velocity.y);
+                jumpVelocity.y += Mathf.Abs(manager.body.velocity.y);
             }
             
             velocity += jumpVelocity;
@@ -159,7 +137,7 @@ namespace smash_bros
                 wallJumpPhase += 1;
                 
                 float wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
-                Vector2 direction = new Vector2 (wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
+                Vector2 direction = new Vector2 (manager.wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
 
                 JumpAction(direction);
             }
