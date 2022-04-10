@@ -2,13 +2,8 @@ using UnityEngine;
 
 namespace smash_bros
 {
-    public class Walk : PlayerMovement
+    public class Walk : Movement
     {
-        // protected Controller      controller ;
-        // protected Rigidbody2D     body       ;
-        // protected GroundCollision ground     ;
-
-        // protected Vector2         velocity   ;
 
         [Header("Walk Settings")]
         [SerializeField, Range(0f, 100f)] private float maxSpeed           = 4f  ;
@@ -27,40 +22,30 @@ namespace smash_bros
         private float acceleration   ;
         private bool  onGround       ;
         private bool  onWall         ;
-
-        // Start is called before the first frame update
-        // protected virtual void Awake()
-        // {
-        //     body       = GetComponent<Rigidbody2D>();
-        //     ground     = GetComponent<GroundCollision>();
-        //     controller = GetComponent<Controller>();
-        // }
-
+        
+        // Update is called once per frame
         private void Update()
         {
-            animator.SetFloat("Speed", Mathf.Abs(velocity.x));
-            direction.x     = controller.input.RetrieveMoveInput();
-            desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
+            direction.x     = manager.input.RetrieveMoveInput();
+            desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - manager.ground.GetFriction(), 0f);
 
         }
 
+        // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
-            onGround = ground.GetOnGround();
-            onWall   = ground.GetOnWall();
+            velocity = manager.body.velocity;
 
-            velocity = body.velocity;
-
-            acceleration   = onGround ? maxAcceleration : maxAirAcceleration;
+            acceleration   = manager.onGround ? maxAcceleration : maxAirAcceleration;
             maxSpeedChange = acceleration * Time.fixedDeltaTime;
             velocity.x     = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
-            if (onWall)
+            if (manager.onWall)
             {
                 if (timeWallStick < maxTimeWallStick)
                 {
                     timeWallStick += Time.fixedDeltaTime;
-                    velocity.x = body.velocity.x;
+                    velocity.x = manager.body.velocity.x;
                 }
             }
             else
@@ -68,17 +53,8 @@ namespace smash_bros
                 timeWallStick = 0;
             }
 
-            body.velocity = velocity ;
-
-            if (velocity.x > 0f)
-            {
-                renderer.flipX = true;
-            }
-            else if (velocity.x < 0f)
-            {
-                renderer.flipX = false;
-            }
-            
+            manager.body.velocity = velocity ;
+                        
         }
     }
 }

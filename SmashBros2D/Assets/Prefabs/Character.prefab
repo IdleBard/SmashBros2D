@@ -14,11 +14,12 @@ GameObject:
   - component: {fileID: 6395903948659334772}
   - component: {fileID: 6395903948659334773}
   - component: {fileID: 6395903948659334774}
-  - component: {fileID: 6395903948659334775}
+  - component: {fileID: 7913767908309700477}
   - component: {fileID: 7620947200569518814}
   - component: {fileID: 6395903948659334769}
   - component: {fileID: 6395903948659334770}
   - component: {fileID: 1303662698}
+  - component: {fileID: 1609421463}
   m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
@@ -258,7 +259,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &6395903948659334775
+--- !u!114 &7913767908309700477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6395903948659334765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5218e5ae05d63a44ebf2a7e5648258f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 758bc709052f3644e88bc0ae4c792516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 8bd1b16722580ab48bdaf307f30963bb, type: 2}
@@ -344,3 +345,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1609421463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395903948659334765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91bda1c3fe743624bb53fe0979e2e88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
