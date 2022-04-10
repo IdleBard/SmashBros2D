@@ -31,6 +31,9 @@ namespace smash_bros
             {
                 renderer.flipX = false;
             }
+            
+            animator.SetBool("isAttacking", manager.input.RetrieveAttackInput());
+
         }
     }
 }

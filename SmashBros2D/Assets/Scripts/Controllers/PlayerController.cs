@@ -19,5 +19,10 @@ namespace smash_bros
         {
             return Input.GetButton("Jump");
         }
+
+        public override bool RetrieveAttackInput()
+        {
+            return Input.GetButtonDown("Fire1");
+        }
     }
 }

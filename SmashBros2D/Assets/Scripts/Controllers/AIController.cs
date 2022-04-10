@@ -19,5 +19,10 @@ namespace smash_bros
         {
             return true;
         }
+
+        public override bool RetrieveAttackInput()
+        {
+            return false;
+        }
     }
 }
