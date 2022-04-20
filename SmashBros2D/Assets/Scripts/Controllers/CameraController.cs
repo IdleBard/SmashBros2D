@@ -14,6 +14,8 @@ namespace smash_bros
         [SerializeField, Range(0f,  1f)] private float verticalSmoothTime = .2f;
         [SerializeField] private Vector2 focusAreaSize = new Vector2(5f, 5f);
 
+        [SerializeField] private bool debugMode = false;
+
         FocusArea focusArea;
         private Collider2D  collider;
         private Rigidbody2D body;
@@ -74,8 +76,11 @@ namespace smash_bros
 
         void OnDrawGizmos()
         {
-            Gizmos.color = new Color (1, 0, 0, .5f);
-            Gizmos.DrawCube (focusArea.center, focusAreaSize);
+            if (debugMode)
+            {
+                Gizmos.color = new Color (1, 0, 0, .5f);
+                Gizmos.DrawCube (focusArea.center, focusAreaSize);
+            }
         }
 
 
