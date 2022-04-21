@@ -8,7 +8,7 @@ namespace smash_bros
     {
         [SerializeField] private bool m_targetable = true;
         [SerializeField] private Transform m_targetTransform;
-        [SerializeField] private Rigidbody m_rbBag;
+        [SerializeField] private Rigidbody2D m_rbBag;
 
         private List<Comp_Hurtbox> m_hurtboxes = new List<Comp_Hurtbox>();
 

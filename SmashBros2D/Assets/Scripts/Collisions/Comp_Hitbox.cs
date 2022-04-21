@@ -7,9 +7,9 @@ namespace smash_bros
 {
     public class Comp_Hitbox : MonoBehaviour, IHitDetector
     {
-        [SerializeField] private BoxCollider m_collider;
-        [SerializeField] private LayerMask m_LayerMask;
-        [SerializeField] private HurtboxMask m_hurtboxMask = HurtboxMask.Enemy;
+        [SerializeField] private BoxCollider2D m_collider    = null              ;
+        [SerializeField] private LayerMask     m_LayerMask  ;
+        [SerializeField] private HurtboxMask   m_hurtboxMask = HurtboxMask.Enemy ;
 
         public float m_thickness = 0.025f;
         private IHitResponder m_hitResponder;
@@ -18,23 +18,22 @@ namespace smash_bros
 
         public void CheckHit(HitData hitData)
         {
-            Vector3 _scaledSize = new Vector3(
+            Vector2 _scaledSize = new Vector2(
                 m_collider.size.x * transform.lossyScale.x,
-                m_collider.size.y * transform.lossyScale.y,
-                m_collider.size.z * transform.lossyScale.z
+                m_collider.size.y * transform.lossyScale.y
             );
 
             float _distance = _scaledSize.y - m_thickness;
-            Vector3 _direction = transform.up;
-            Vector3 _center = transform.TransformPoint(m_collider.center);
-            Vector3 _start = _center - _direction * (_distance / 2);
-            Vector3 _halfExtents = new Vector3( _scaledSize.x, m_thickness, _scaledSize.z / 2);
-            Quaternion _orientation = transform.rotation;
+            Vector2 _direction = transform.up;
+            Vector2 _center = transform.TransformPoint(m_collider.offset);
+            Vector2 _start = _center - _direction * (_distance / 2);
+            Vector2 _halfExtents = new Vector2( _scaledSize.x, m_thickness);
+            float _angle = transform.rotation.z;
 
             HitData _hitdata = null;
             IHurtbox _hurtbox = null;
-            RaycastHit[] _hits = Physics.BoxCastAll(_start, _halfExtents, _direction, _orientation, _distance, m_LayerMask);
-            foreach (RaycastHit _hit in _hits)
+            RaycastHit2D[] _hits = Physics2D.BoxCastAll(_start, _halfExtents, _angle, _direction, _distance, m_LayerMask);
+            foreach (RaycastHit2D _hit in _hits)
             {
                 _hurtbox = _hit.collider.GetComponent<IHurtbox>();
                 if (_hurtbox != null)
@@ -45,7 +44,7 @@ namespace smash_bros
                         _hitdata = new HitData
                         {
                             damage = m_hitResponder == null ? 0 : m_hitResponder.Damage,
-                            hitPoint = _hit.point == Vector3.zero ? _center : _hit.point,
+                            hitPoint = _hit.point == Vector2.zero ? _center : _hit.point,
                             hitNormal = _hit.normal,
                             hurtbox = _hurtbox,
                             hitDetector = this

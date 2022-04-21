@@ -7,8 +7,10 @@ namespace smash_bros
     public class HitData
     {
         public int damage;
-        public Vector3 hitPoint;
-        public Vector3 hitNormal;
+        
+        public Vector2 hitPoint;
+        public Vector2 hitNormal;
+
         public IHurtbox hurtbox;
         public IHitDetector hitDetector;
 
