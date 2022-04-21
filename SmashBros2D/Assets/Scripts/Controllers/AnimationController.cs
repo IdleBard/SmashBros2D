@@ -7,14 +7,14 @@ namespace smash_bros
     {
         private Manager         manager    ;
         private Animator        animator   ;
-        private SpriteRenderer  renderer   ;
+        // private SpriteRenderer  renderer   ;
 
         // Awake is called before the first frame update
         protected virtual void Awake()
         {
             manager    = GetComponent<Manager>();
             animator   = GetComponent<Animator>();
-            renderer   = GetComponent<SpriteRenderer>();
+            // renderer   = GetComponent<SpriteRenderer>();
         }
 
         // Update is called once per frame
@@ -25,11 +25,13 @@ namespace smash_bros
 
             if (manager.body.velocity.x > 0f)
             {
-                renderer.flipX = true;
+                // renderer.flipX = true;
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
             else if (manager.body.velocity.x < 0f)
             {
-                renderer.flipX = false;
+                // renderer.flipX = false;
+                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
             
             animator.SetBool("isAttacking", manager.input.RetrieveAttackInput());

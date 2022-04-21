@@ -1,26 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 
-public class Comp_Hurtbox : MonoBehaviour, IHurtbox
+namespace smash_bros
 {
-    [SerializeField] private bool m_active = true;
-    [SerializeField] private GameObject m_owner = null;
-    [SerializeField] private HurtboxType m_hurtboxType = HurtboxType.Enemy;
-    private IHurtResponder m_hurtResponder;
-    
-    public bool Active { get => m_active; }
-    public GameObject Owner { get => m_owner; }
-    public Transform Transform { get => transform;}
-    public HurtboxType Type { get => m_hurtboxType;}
-    public IHurtResponder HurtResponder { get => m_hurtResponder; set => m_hurtResponder = value; }
-    
-    public bool CheckHit(HitData hitData)
+    public class Comp_Hurtbox : MonoBehaviour, IHurtbox
     {
-        if (m_hurtResponder == null)
+        [SerializeField] private bool m_active = true;
+        [SerializeField] private GameObject m_owner = null;
+        [SerializeField] private HurtboxType m_hurtboxType = HurtboxType.Enemy;
+        private IHurtResponder m_hurtResponder;
+        
+        public bool Active { get => m_active; }
+        public GameObject Owner { get => m_owner; }
+        public Transform Transform { get => transform;}
+        public HurtboxType Type { get => m_hurtboxType;}
+        public IHurtResponder HurtResponder { get => m_hurtResponder; set => m_hurtResponder = value; }
+        
+        public bool CheckHit(HitData hitData)
         {
-            Debug.Log("No Responder");
+            if (m_hurtResponder == null)
+            {
+                Debug.Log("No Responder");
+            }
+            return true;
         }
-        return true;
     }
 }
