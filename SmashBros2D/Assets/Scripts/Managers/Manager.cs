@@ -6,6 +6,7 @@ namespace smash_bros
     public class Manager : MonoBehaviour
     {
         [SerializeField] internal InputController input = null;
+        [SerializeField] internal PlayerHitResponder hitResponder ;
 
         internal Rigidbody2D     body   ;
         internal GroundCollision ground ;
@@ -16,6 +17,8 @@ namespace smash_bros
         internal bool onLeftWall  { get; private set; }
         internal int  wallSide    { get; private set; }
         internal int  oldWallSide { get; private set; }
+
+        internal bool isAttacking = false;
 
         // Start is called before the first frame update
         private void Awake()
@@ -31,6 +34,12 @@ namespace smash_bros
             onWall      = ground.GetOnWall();
             wallSide    = ground.GetWallSide();
         }
+
+        public void Attack()
+        {
+            hitResponder.Attack();
+        }
+
 
     }
 }

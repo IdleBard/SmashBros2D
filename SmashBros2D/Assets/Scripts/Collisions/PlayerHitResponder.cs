@@ -26,15 +26,21 @@ namespace smash_bros
             _hitbox.hitResponder = this;
         }
 
-        private void Update()
+        public void Attack()
         {
-            isAttacking = _manager.input.RetrieveAttackInput();
-
-            if (isAttacking)
-            {
-                _hitbox.CheckHit(null);
-            }
+            _hitbox.CheckHit(null);
         }
+
+        // private void Update()
+        // {
+        //     isAttacking = _manager.isAttacking;
+        //     // isAttacking = _manager.input.RetrieveAttackInput();
+
+        //     // if (isAttacking)
+        //     // {
+        //     //     _hitbox.CheckHit(null);
+        //     // }
+        // }
 
         bool IHitResponder.CheckHit(HitData data)
         {
