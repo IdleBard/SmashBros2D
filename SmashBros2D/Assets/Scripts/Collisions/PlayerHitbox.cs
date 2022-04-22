@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace smash_bros
 {
-    public class Comp_Hitbox : MonoBehaviour, IHitDetector
+    public class PlayerHitbox : MonoBehaviour, IHitDetector
     {
         [Header("Hitbox Settings")]
         [SerializeField, Range(  0f,  1f)] private float radius   = .5f ;
@@ -12,14 +12,14 @@ namespace smash_bros
         [SerializeField, Range(-90f, 90f)] private float angle    =  0f ;
         
         [Header("Target Settings")]
-        [SerializeField] private LayerMask     m_LayerMask  ;
-        [SerializeField] private HurtboxMask   m_hurtboxMask = HurtboxMask.Enemy ;
+        [SerializeField] private LayerMask     layerMask  ;
+        [SerializeField] private HurtboxMask   hurtboxMask = HurtboxMask.Enemy ;
 
         [Header("Debug Settings")]
         [SerializeField] bool debugMode = true;
 
-        private IHitResponder m_hitResponder;
-        public  IHitResponder HitResponder { get => m_hitResponder; set => m_hitResponder = value; }
+        private IHitResponder _hitResponder;
+        public  IHitResponder hitResponder { get => _hitResponder; set => _hitResponder = value; }
 
         public void CheckHit(HitData hitData)
         {
@@ -29,28 +29,28 @@ namespace smash_bros
 
             Vector2 _direction = new Vector2(transform.lossyScale.x * Mathf.Cos(angle * Mathf.PI / 180f), Mathf.Sin(angle * Mathf.PI / 180f));
 
-            RaycastHit2D[] _hits = Physics2D.CircleCastAll(transform.position, radius, _direction, (distance + radius), m_LayerMask);
+            RaycastHit2D[] _hits = Physics2D.CircleCastAll(transform.position, radius, _direction, (distance + radius), layerMask);
             foreach (RaycastHit2D _hit in _hits)
             {
                 _hurtbox = _hit.collider.GetComponent<IHurtbox>();
                 if (_hurtbox != null)
                 {
-                    if (m_hurtboxMask.HasFlag((HurtboxMask)_hurtbox.Type))
+                    if (hurtboxMask.HasFlag((HurtboxMask)_hurtbox.type))
                     {
                         // Generate Hitdata
                         _hitdata = new HitData
                         {
-                            damage = m_hitResponder == null ? 0 : m_hitResponder.Damage,
-                            hitPoint = _hit.point == Vector2.zero ? new Vector2(transform.position.x, transform.position.y) : _hit.point,
-                            hitNormal = _hit.normal,
-                            hurtbox = _hurtbox,
+                            damage      = _hitResponder == null ? 0 : _hitResponder.Damage,
+                            hitPoint    = _hit.point == Vector2.zero ? new Vector2(transform.position.x, transform.position.y) : _hit.point,
+                            hitNormal   = _hit.normal,
+                            hurtbox     = _hurtbox,
                             hitDetector = this
                         };
 
                         if (_hitdata.Validate())
                         {
-                            _hitdata.hitDetector.HitResponder.Response(_hitdata);
-                            _hitdata.hurtbox.HurtResponder.Response(_hitdata);
+                            _hitdata.hitDetector.hitResponder.Response(_hitdata);
+                            _hitdata.hurtbox.hurtResponder.Response(_hitdata);
                         }
                     }
                     

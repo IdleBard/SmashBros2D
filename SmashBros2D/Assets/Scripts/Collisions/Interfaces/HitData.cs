@@ -8,11 +8,11 @@ namespace smash_bros
     {
         public int damage;
         
-        public Vector2 hitPoint;
-        public Vector2 hitNormal;
+        public Vector2 hitPoint  ;
+        public Vector2 hitNormal ;
 
-        public IHurtbox hurtbox;
-        public IHitDetector hitDetector;
+        public IHurtbox     hurtbox     ;
+        public IHitDetector hitDetector ;
 
         public bool Validate()
         {
@@ -20,9 +20,9 @@ namespace smash_bros
             {
                 if (hurtbox.CheckHit(this))
                 {
-                    if (hurtbox.HurtResponder == null || hurtbox.HurtResponder.CheckHit(this))
+                    if (hurtbox.hurtResponder == null || hurtbox.hurtResponder.CheckHit(this))
                     {
-                        if (hitDetector.HitResponder == null || hitDetector.HitResponder.CheckHit(this))
+                        if (hitDetector.hitResponder == null || hitDetector.hitResponder.CheckHit(this))
                         {
                             return true;
                         }
@@ -61,7 +61,7 @@ namespace smash_bros
 
     public interface IHitDetector
     {
-        public IHitResponder HitResponder {get; set; }
+        public IHitResponder hitResponder {get; set; }
         
         public void CheckHit(HitData data);
     }
@@ -75,11 +75,11 @@ namespace smash_bros
 
     public interface IHurtbox
     {
-        public bool Active { get ; }
-        public GameObject Owner { get ; }
-        public Transform Transform { get ;}
-        public HurtboxType Type { get ;}
-        public IHurtResponder HurtResponder { get; set; }
+        public bool           active        { get ; }
+        public GameObject     owner         { get ; }
+        // public Transform      transform     { get ; }
+        public HurtboxType    type          { get ; }
+        public IHurtResponder hurtResponder { get ; set; }
         
         public bool CheckHit(HitData hitData);
     }

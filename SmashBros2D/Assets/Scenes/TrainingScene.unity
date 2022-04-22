@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &249997726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8742285673232772449, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
-  m_PrefabInstance: {fileID: 8742285673012135167}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &603673643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,25 +212,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1727921343, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921343, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921343, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921344, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921344, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 1
+    - target: {fileID: 991289742, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334765, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_Name
@@ -283,10 +262,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6395903948659334774, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -521,10 +496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8742285672806945502, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
-      propertyPath: m_owner
-      value: 
-      objectReference: {fileID: 249997726}
     - target: {fileID: 8742285673232772445, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -571,15 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742285673232772449, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
       propertyPath: m_Name
-      value: Bag
-      objectReference: {fileID: 0}
-    - target: {fileID: 8742285673798864608, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8742285673798864608, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 1
+      value: PunchingBag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}

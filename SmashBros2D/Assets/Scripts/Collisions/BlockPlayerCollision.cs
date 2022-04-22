@@ -6,20 +6,20 @@ namespace smash_bros
 {
     public class BlockPlayerCollision : MonoBehaviour
     {
-        private Collider2D[] characterColliders;
-        private Collider2D   characterBlockerCollider;
+        private Collider2D[] playerColliders;
+        private Collider2D   playerBlockerCollider;
 
         void Awake()
         {
-            characterBlockerCollider = GetComponent<Collider2D>();
-            characterColliders       = transform.parent.GetComponents<Collider2D>();
+            playerBlockerCollider = GetComponent<Collider2D>();
+            playerColliders       = transform.parent.GetComponents<Collider2D>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            foreach (Collider2D characterCollider in characterColliders)
-                Physics2D.IgnoreCollision(characterCollider, characterBlockerCollider, true);
+            foreach (Collider2D playerCollider in playerColliders)
+                Physics2D.IgnoreCollision(playerCollider, playerBlockerCollider, true);
         }
     }
 }
