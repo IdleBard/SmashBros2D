@@ -284,5 +284,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def8d8a0bc1955146a48bdce8a30d684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 8742285673232772447}
-  characterBlockerCollider: {fileID: 8742285673798864609}
