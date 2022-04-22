@@ -212,9 +212,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 991289741, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 991289741, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 991289742, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 64
+      propertyPath: angle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 991289742, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: distance
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334765, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_Name

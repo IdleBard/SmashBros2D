@@ -34,7 +34,10 @@ namespace smash_bros
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
             
-            animator.SetBool("isAttacking", manager.input.RetrieveAttackInput());
+            if (manager.input.RetrieveAttackInput())
+            {
+                animator.SetTrigger("isAttacking");
+            }
 
         }
     }
