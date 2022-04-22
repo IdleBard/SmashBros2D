@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 834186875}
     - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: focusAreaSize.x
@@ -539,6 +539,14 @@ PrefabInstance:
     - target: {fileID: 8659889759974352562, guid: f7728b90980dbc14f82b6bb4b034e520, type: 3}
       propertyPath: m_Name
       value: PuncingBag
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659889760129478192, guid: f7728b90980dbc14f82b6bb4b034e520, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659889760129478192, guid: f7728b90980dbc14f82b6bb4b034e520, type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7728b90980dbc14f82b6bb4b034e520, type: 3}

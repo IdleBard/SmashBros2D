@@ -1,4 +1,3 @@
-// using System.Diagnostics;
 // using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,32 +6,30 @@ namespace smash_bros
 {
     public class Comp_Hitbox : MonoBehaviour, IHitDetector
     {
-        [SerializeField] private BoxCollider2D m_collider    = null              ;
+        [Header("Hitbox Settings")]
+        [SerializeField, Range(  0f,  1f)] private float radius   = .5f ;
+        [SerializeField, Range(  0f,  5f)] private float distance = .5f ;
+        [SerializeField, Range(-90f, 90f)] private float angle    =  0f ;
+        
+        [Header("Target Settings")]
         [SerializeField] private LayerMask     m_LayerMask  ;
         [SerializeField] private HurtboxMask   m_hurtboxMask = HurtboxMask.Enemy ;
 
-        public float m_thickness = 0.025f;
-        private IHitResponder m_hitResponder;
+        [Header("Debug Settings")]
+        [SerializeField] bool debugMode = true;
 
-        public IHitResponder HitResponder { get => m_hitResponder; set => m_hitResponder = value; }
+        private IHitResponder m_hitResponder;
+        public  IHitResponder HitResponder { get => m_hitResponder; set => m_hitResponder = value; }
 
         public void CheckHit(HitData hitData)
         {
-            Vector2 _scaledSize = new Vector2(
-                m_collider.size.x * transform.lossyScale.x,
-                m_collider.size.y * transform.lossyScale.y
-            );
 
-            float _distance = _scaledSize.y - m_thickness;
-            Vector2 _direction = transform.up;
-            Vector2 _center = transform.TransformPoint(m_collider.offset);
-            Vector2 _start = _center - _direction * (_distance / 2);
-            Vector2 _halfExtents = new Vector2( _scaledSize.x, m_thickness);
-            float _angle = transform.rotation.z;
-
-            HitData _hitdata = null;
+            HitData  _hitdata = null;
             IHurtbox _hurtbox = null;
-            RaycastHit2D[] _hits = Physics2D.BoxCastAll(_start, _halfExtents, _angle, _direction, _distance, m_LayerMask);
+
+            Vector2 _direction = new Vector2(transform.lossyScale.x * Mathf.Cos(angle * Mathf.PI / 180f), Mathf.Sin(angle * Mathf.PI / 180f));
+
+            RaycastHit2D[] _hits = Physics2D.CircleCastAll(transform.position, radius, _direction, (distance + radius), m_LayerMask);
             foreach (RaycastHit2D _hit in _hits)
             {
                 _hurtbox = _hit.collider.GetComponent<IHurtbox>();
@@ -44,7 +41,7 @@ namespace smash_bros
                         _hitdata = new HitData
                         {
                             damage = m_hitResponder == null ? 0 : m_hitResponder.Damage,
-                            hitPoint = _hit.point == Vector2.zero ? _center : _hit.point,
+                            hitPoint = _hit.point == Vector2.zero ? new Vector2(transform.position.x, transform.position.y) : _hit.point,
                             hitNormal = _hit.normal,
                             hurtbox = _hurtbox,
                             hitDetector = this
@@ -58,6 +55,16 @@ namespace smash_bros
                     }
                     
                 }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (debugMode)
+            {
+                Vector2 _direction = new Vector2(transform.lossyScale.x * Mathf.Cos(angle * Mathf.PI / 180f), Mathf.Sin(angle * Mathf.PI / 180f));
+                Gizmos.DrawWireSphere(transform.position, radius);
+                Gizmos.DrawWireSphere(transform.position + (new Vector3(_direction.x, _direction.y, 0f) * distance), radius);
             }
         }
     }

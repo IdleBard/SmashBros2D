@@ -28,7 +28,8 @@ namespace smash_bros
 
         void IHurtResponder.Response(HitData data)
         {
-            Debug.Log("Hurt Response");
+            Debug.Log("Hurt Response " + data.hitNormal * data.damage);
+            m_rbBag.AddForce(-1 * data.hitNormal * data.damage, ForceMode2D.Impulse);
         }
 
     }
