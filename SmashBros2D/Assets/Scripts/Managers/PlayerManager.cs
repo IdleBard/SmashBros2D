@@ -7,8 +7,7 @@ namespace SmashBros2D
     {
         [SerializeField] internal PlayerHitResponder hitResponder ;
         
-        internal Rigidbody2D     body   ;
-        internal GroundCollision ground ;
+
 
         internal bool onGround    { get; private set; }
         internal bool onWall      { get; private set; }
@@ -18,13 +17,6 @@ namespace SmashBros2D
         internal int  oldWallSide { get; private set; }
 
         internal bool isAttacking = false;
-
-        // Start is called before the first frame update
-        private void Awake()
-        {
-            body       = GetComponent<Rigidbody2D>();
-            ground     = GetComponent<GroundCollision>();
-        }
 
         // Update is called once per frame
         private void Update()
@@ -38,6 +30,7 @@ namespace SmashBros2D
         {
             hitResponder.Attack();
         }
+
 
 
     }
