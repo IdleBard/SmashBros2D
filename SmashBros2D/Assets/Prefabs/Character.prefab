@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 8bd1b16722580ab48bdaf307f30963bb, type: 2}
+  stats: {fileID: 11400000, guid: e0b53336d4cec6d4087c1112cf230522, type: 2}
   hitResponder: {fileID: 991289743}
 --- !u!114 &7620947200569518814
 MonoBehaviour:
@@ -489,6 +490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8216718395721710266, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
+      propertyPath: _attackData
+      value: 
+      objectReference: {fileID: 11400000, guid: f1ec12b5f71fbd343bfc6533f4a5e80b, type: 2}
     - target: {fileID: 8216718395721710267, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
       propertyPath: angle
       value: 35
