@@ -63,8 +63,18 @@ namespace SmashBros2D
             if (debugMode)
             {
                 Vector2 _direction = new Vector2(transform.lossyScale.x * Mathf.Cos(angle * Mathf.PI / 180f), Mathf.Sin(angle * Mathf.PI / 180f));
+                Gizmos.color = Color.white;
                 Gizmos.DrawWireSphere(transform.position, radius);
                 Gizmos.DrawWireSphere(transform.position + (new Vector3(_direction.x, _direction.y, 0f) * distance), radius);
+                
+                if (_hitResponder != null)
+                {
+                    if (_hitResponder.attackData != null)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawRay(transform.position, _hitResponder.attackData.direction);
+                    }
+                }
             }
         }
     }
