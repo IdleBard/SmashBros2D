@@ -193,6 +193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCollisionBlocker
       objectReference: {fileID: 0}
+    - target: {fileID: 8654152750577559638, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModule
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
 --- !u!4 &8742285673798864611 stripped
@@ -254,6 +258,10 @@ PrefabInstance:
     - target: {fileID: 559887101527889231, guid: a891386d0c1ffcf43b0ccf3521e31229, type: 3}
       propertyPath: m_Name
       value: Hurtbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 559887101527889231, guid: a891386d0c1ffcf43b0ccf3521e31229, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModule
       objectReference: {fileID: 0}
     - target: {fileID: 9156884916390943290, guid: a891386d0c1ffcf43b0ccf3521e31229, type: 3}
       propertyPath: _owner

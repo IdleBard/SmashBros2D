@@ -5,7 +5,7 @@ namespace SmashBros2D
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerManager : CharacterManager
     {
-        [SerializeField] internal PlayerHitResponder hitResponder ;
+        
 
         internal EnvironmentCollisionDetection detector ;
 
@@ -30,10 +30,10 @@ namespace SmashBros2D
             }
         }
 
-        public void Attack()
-        {
-            hitResponder.Attack();
-        }
+        // public void Attack()
+        // {
+        //     hitResponder.Attack();
+        // }
 
 
 

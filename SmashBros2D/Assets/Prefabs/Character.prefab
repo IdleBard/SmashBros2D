@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 6395903948659334772}
   - component: {fileID: 1303662698}
   - component: {fileID: 7913767908309700477}
+  - component: {fileID: 6395903948659334770}
   - component: {fileID: 7620947200569518814}
   - component: {fileID: 6395903948659334769}
-  - component: {fileID: 6395903948659334770}
+  - component: {fileID: 1020877308390935915}
   - component: {fileID: 1609421463}
   m_Layer: 6
   m_Name: Character
@@ -225,7 +226,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6395903948659334765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -294,7 +295,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 8bd1b16722580ab48bdaf307f30963bb, type: 2}
   stats: {fileID: 11400000, guid: e0b53336d4cec6d4087c1112cf230522, type: 2}
-  hitResponder: {fileID: 991289743}
+--- !u!114 &6395903948659334770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395903948659334765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37990437655cf243b450eed31d2d746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxGroudAngle: 60
+  minWallAngle: 75
+  maxWallAngle: 90
+  uncertainty: 0.1
 --- !u!114 &7620947200569518814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +349,7 @@ MonoBehaviour:
   defaultGravityScale: 1
   fallGravityMultiplier: 3
   upGravityMultiplier: 2
---- !u!114 &6395903948659334770
+--- !u!114 &1020877308390935915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,13 +358,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6395903948659334765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a37990437655cf243b450eed31d2d746, type: 3}
+  m_Script: {fileID: 11500000, guid: 651be1d06b36f134680f02b0ec03a391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGroudAngle: 60
-  minWallAngle: 75
-  maxWallAngle: 90
-  uncertainty: 0.1
+  attackPoint: {fileID: 991289740}
 --- !u!114 &1609421463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCollisionBlocker
       objectReference: {fileID: 0}
+    - target: {fileID: 8654152750577559638, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModule
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
 --- !u!4 &2358405839809863490 stripped
@@ -488,7 +505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8216718395721710265, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
       propertyPath: m_Name
-      value: AttackPoint
+      value: SimpleAttackPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216718395721710265, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModule
       objectReference: {fileID: 0}
     - target: {fileID: 8216718395721710266, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
       propertyPath: _attackData
@@ -504,19 +525,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
+--- !u!1 &991289740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8216718395721710265, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
+  m_PrefabInstance: {fileID: 8216718396444449589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &991289741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8216718395721710264, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
   m_PrefabInstance: {fileID: 8216718396444449589}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &991289743 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8216718395721710266, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
-  m_PrefabInstance: {fileID: 8216718396444449589}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d76034a559b6d74a94ae645564c4a10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

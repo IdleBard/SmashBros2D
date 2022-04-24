@@ -7,8 +7,9 @@ namespace SmashBros2D
     [RequireComponent(typeof(PlayerHitbox))]
     public class PlayerHitResponder : MonoBehaviour, IHitResponder
     {
-        [SerializeField] private bool       _isAttacking = false ;
         [SerializeField] private AttackData _attackData  = null  ;
+
+        internal bool isAttacking ;
         
         private PlayerHitbox  _hitbox  ;
         private PlayerManager _manager ;
@@ -24,32 +25,27 @@ namespace SmashBros2D
         private void Start()
         {
             _hitbox.hitResponder = this;
+            isAttacking = false;
         }
 
-        public void Attack()
+        private void Update()
         {
-            _hitbox.CheckHit(null);
+            if (isAttacking)
+            {
+                _hitbox.CheckHit(null);
+            }
         }
 
-        // private void Update()
-        // {
-        //     isAttacking = _manager.isAttacking;
-        //     // isAttacking = _manager.input.RetrieveAttackInput();
-
-        //     // if (isAttacking)
-        //     // {
-        //     //     _hitbox.CheckHit(null);
-        //     // }
-        // }
-
-        bool IHitResponder.CheckHit(HitData data)
+        public bool CheckHit(HitData data)
         {
+            Debug.Log("PlayerHitResponder.CheckHit");
             return true;
         }
 
-        void IHitResponder.Response(HitData data)
+        public void Response(HitData data)
         {
-
+            Debug.Log("PlayerHitResponder.Response");
+            isAttacking = false;
         }
     }
 }
