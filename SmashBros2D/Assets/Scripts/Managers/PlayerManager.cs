@@ -3,11 +3,10 @@ using UnityEngine;
 namespace SmashBros2D
 {   
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
-        [SerializeField] internal InputController input = null;
         [SerializeField] internal PlayerHitResponder hitResponder ;
-
+        
         internal Rigidbody2D     body   ;
         internal GroundCollision ground ;
 
