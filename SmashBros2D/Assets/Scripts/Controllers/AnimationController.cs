@@ -23,12 +23,12 @@ namespace smash_bros
             animator.SetBool("isJumping", !manager.onGround);
             animator.SetFloat("Speed", Mathf.Abs(manager.body.velocity.x));
 
-            if (manager.body.velocity.x > 0f)
+            if (manager.input.RetrieveMoveInput() > 0f)
             {
                 // renderer.flipX = true;
                 transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
-            else if (manager.body.velocity.x < 0f)
+            else if (manager.input.RetrieveMoveInput() < 0f)
             {
                 // renderer.flipX = false;
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);

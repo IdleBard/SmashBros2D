@@ -4,20 +4,23 @@ using UnityEngine;
 
 namespace smash_bros
 {
+    [RequireComponent(typeof(PlayerHurtbox))]
     public class PlayerHurtResponder : MonoBehaviour, IHurtResponder
     {
-        private Rigidbody2D         _body;
-        private List<PlayerHurtbox> _hurtboxes = new List<PlayerHurtbox>();
+        [SerializeField] private Rigidbody2D   _body    ;
+        [SerializeField] private PlayerHurtbox _hurtbox ;
+        // private List<PlayerHurtbox> _hurtboxes = new List<PlayerHurtbox>();
 
         private void Awake()
         {
-            _body = GetComponent<Rigidbody2D>();
-
-            _hurtboxes = new List<PlayerHurtbox>(GetComponentsInChildren<PlayerHurtbox>());
-            foreach (PlayerHurtbox _hurtbox in _hurtboxes)
-            {
-                _hurtbox.hurtResponder = this;
-            }
+            // _hurtboxes = new List<PlayerHurtbox>(GetComponents<PlayerHurtbox>());
+            // foreach (PlayerHurtbox _hurtbox in _hurtboxes)
+            // {
+            //     _hurtbox.hurtResponder = this;
+            // }
+            _hurtbox = GetComponent<PlayerHurtbox>();
+            _hurtbox.hurtResponder = this;
+            _body      = _hurtbox.owner.GetComponent<Rigidbody2D>();
         }
 
         bool IHurtResponder.CheckHit(HitData data)
