@@ -19,127 +19,122 @@ namespace SmashBros2D
         [SerializeField, Range(0f, 5f)]  private float fallGravityMultiplier = 3f ;
         [SerializeField, Range(0f, 5f)]  private float upGravityMultiplier   = 2f ;
         
-        private int  jumpPhase     ;
-        private int  jumpBuffer    ;
-        private int  coyoteTime    ;
-        private int  wallJumpPhase ;
-
-        // Collision bool
-        // private bool onGround    ;
-        // private bool onWall      ;
-        // private bool onRightWall ;
-        // private bool onLeftWall  ;
-        // private int  wallSide    ;
-        private int  oldWallSide ;
-
+        // Counters
+        private int  _jumpPhase     ;
+        private int  _jumpBuffer    ;
+        private int  _coyoteTime    ;
+        private int  _wallJumpPhase ;
 
         // Input Bool
-        private bool holdJumpButton ;
-        private bool desiredJump    ;
+        private bool _holdJumpButton ;
+        private bool _desiredJump    ;
+
+        // Buffers
+        private int _oldWallSide;
 
         // Update is called once per frame
         void Update()
         {
-            desiredJump   |= manager.input.RetrieveJumpInput();
-            holdJumpButton = manager.input.RetrieveHoldJumpInput();
+            _desiredJump   |= _manager.input.RetrieveJumpInput();
+            _holdJumpButton = _manager.input.RetrieveHoldJumpInput();
         }
 
         // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
 
-            if (manager.onWall && manager.wallSide != oldWallSide)
+            if (_manager.env.onWall && _manager.env.wallSide != _oldWallSide)
             {
-                wallJumpPhase = 0;
+                _wallJumpPhase = 0;
             }
 
-            oldWallSide = manager.wallSide;          
+            _oldWallSide = _manager.env.wallSide;          
 
-            velocity = manager.body.velocity;
+            _velocity = _manager.body.velocity;
 
-            if (manager.onGround)
+            if (_manager.env.onGround)
             {
-                jumpPhase     = 0;
-                jumpBuffer    = 0;
-                coyoteTime    = 0;
-                wallJumpPhase = 0;
+                _jumpPhase     = 0;
+                _jumpBuffer    = 0;
+                _coyoteTime    = 0;
+                _wallJumpPhase = 0;
             }
             else
             {
-                coyoteTime += 1;
+                _coyoteTime += 1;
             }
 
-            if (desiredJump)
+            if (_desiredJump)
             {   
                 
-                if (manager.onGround || jumpPhase < maxAirJumps || coyoteTime < maxCoyoteTime)
+                if (_manager.env.onGround || _jumpPhase < maxAirJumps || _coyoteTime < maxCoyoteTime)
                 {
-                    desiredJump = false;
+                    _desiredJump = false;
                     JumpAction(Vector2.up);
                 }
-                else if(enableWallJump && manager.onWall)
+                else if(enableWallJump && _manager.env.onWall)
                 {   
-                    desiredJump = false;
+                    _desiredJump = false;
                     WallJumpAction();
                 }
-                else if (jumpBuffer < maxJumpBuffer)
+                else if (_jumpBuffer < maxJumpBuffer)
                 {
-                    jumpBuffer += 1;
-                    desiredJump = true;
+                    _jumpBuffer += 1;
+                    _desiredJump = true;
                 }
                 else
                 {
-                    desiredJump = false;
+                    _desiredJump = false;
                 }
                 
             }
 
             // Improve Jump
-            if (manager.body.velocity.y < 0) // Faster Falling
+            if (_manager.body.velocity.y < 0) // Faster Falling
             {
-                manager.body.gravityScale = defaultGravityScale * fallGravityMultiplier;
+                _manager.body.gravityScale = defaultGravityScale * fallGravityMultiplier;
             }
-            else if (manager.body.velocity.y > 0 && !holdJumpButton) // Low Jump
+            else if (_manager.body.velocity.y > 0 && !_holdJumpButton) // Low Jump
             {
-                manager.body.gravityScale = defaultGravityScale * upGravityMultiplier;
+                _manager.body.gravityScale = defaultGravityScale * upGravityMultiplier;
             }
             else
             {
-                manager.body.gravityScale = defaultGravityScale;
+                _manager.body.gravityScale = defaultGravityScale;
             }
 
-            manager.body.velocity = velocity;
+            _manager.body.velocity = _velocity;
         }
 
         private void JumpAction(Vector2 direction)
         {
-            jumpPhase += 1;
+            _jumpPhase += 1;
             
-            float   jumpSpeed    = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
-            Vector2 jumpVelocity = direction * jumpSpeed;
+            float   _jumpSpeed    = Mathf.Sqrt(2f * defaultGravityScale * Mathf.Abs(Physics2D.gravity.y) * jumpHeight);
+            Vector2 _jumpVelocity = direction * _jumpSpeed;
             
-            if (velocity.y > 0f)
+            if (_velocity.y > 0f)
             {
-                jumpVelocity.y = Mathf.Max(jumpVelocity.y - velocity.y, 0f);
+                _jumpVelocity.y = Mathf.Max(_jumpVelocity.y - _velocity.y, 0f);
             }
-            else if (velocity.y < 0f)
+            else if (_velocity.y < 0f)
             {
-                jumpVelocity.y += Mathf.Abs(manager.body.velocity.y);
+                _jumpVelocity.y += Mathf.Abs(_manager.body.velocity.y);
             }
             
-            velocity += jumpVelocity;
+            _velocity += _jumpVelocity;
         }
 
         private void WallJumpAction()
         {
-            if (wallJumpPhase < maxWallJumps)
+            if (_wallJumpPhase < maxWallJumps)
             {
-                wallJumpPhase += 1;
+                _wallJumpPhase += 1;
                 
-                float wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
-                Vector2 direction = new Vector2 (manager.wallSide * Mathf.Cos(wallJumpAngleRadiant),Mathf.Sin(wallJumpAngleRadiant));
+                float   _wallJumpAngleRadiant = wallJumpAngle * Mathf.PI / 180f;
+                Vector2 _direction = new Vector2 (_manager.env.wallSide * Mathf.Cos(_wallJumpAngleRadiant), Mathf.Sin(_wallJumpAngleRadiant));
 
-                JumpAction(direction);
+                JumpAction(_direction);
             }
         }
     }

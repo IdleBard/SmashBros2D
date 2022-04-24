@@ -6,24 +6,28 @@ namespace SmashBros2D
     public class PlayerManager : CharacterManager
     {
         [SerializeField] internal PlayerHitResponder hitResponder ;
-        
 
+        internal EnvironmentCollisionDetection detector ;
 
-        internal bool onGround    { get; private set; }
-        internal bool onWall      { get; private set; }
-        internal bool onRightWall { get; private set; }
-        internal bool onLeftWall  { get; private set; }
-        internal int  wallSide    { get; private set; }
-        internal int  oldWallSide { get; private set; }
+        private EnvironmentCollision _env;
+        public  EnvironmentCollision env { get => _env ; }
 
         internal bool isAttacking = false;
+
+        // Start is called before the first frame update
+        protected override void Awake()
+        {
+            base.Awake();
+            detector   = GetComponent<EnvironmentCollisionDetection>();
+        }
 
         // Update is called once per frame
         private void Update()
         {
-            onGround    = ground.GetOnGround();
-            onWall      = ground.GetOnWall();
-            wallSide    = ground.GetWallSide();
+            if (detector != null)
+            {
+                _env = detector.env;
+            }
         }
 
         public void Attack()

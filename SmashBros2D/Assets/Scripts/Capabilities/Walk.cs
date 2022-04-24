@@ -13,47 +13,45 @@ namespace SmashBros2D
         [Header("Wall Stick")]
         [SerializeField, Range(0f, 1f)] private float maxTimeWallStick = .1f ;
 
-        private float timeWallStick;
+        private float _timeWallStick;
 
         private Vector2 direction       ;
         private Vector2 desiredVelocity ;
         
-        private float maxSpeedChange ;
-        private float acceleration   ;
-        private bool  onGround       ;
-        private bool  onWall         ;
+        private float _maxSpeedChange ;
+        private float _acceleration   ;
         
         // Update is called once per frame
         private void Update()
         {
-            direction.x     = manager.input.RetrieveMoveInput();
-            desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - manager.ground.GetFriction(), 0f);
+            direction.x     = _manager.input.RetrieveMoveInput();
+            desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - _manager.env.friction, 0f);
 
         }
 
         // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
-            velocity = manager.body.velocity;
+            _velocity = _manager.body.velocity;
 
-            acceleration   = manager.onGround ? maxAcceleration : maxAirAcceleration;
-            maxSpeedChange = acceleration * Time.fixedDeltaTime;
-            velocity.x     = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+            _acceleration   = _manager.env.onGround ? maxAcceleration : maxAirAcceleration;
+            _maxSpeedChange = _acceleration * Time.fixedDeltaTime;
+            _velocity.x     = Mathf.MoveTowards(_velocity.x, desiredVelocity.x, _maxSpeedChange);
 
-            if (manager.onWall)
+            if (_manager.env.onWall)
             {
-                if (timeWallStick < maxTimeWallStick)
+                if (_timeWallStick < maxTimeWallStick)
                 {
-                    timeWallStick += Time.fixedDeltaTime;
-                    velocity.x = manager.body.velocity.x;
+                    _timeWallStick += Time.fixedDeltaTime;
+                    _velocity.x = _manager.body.velocity.x;
                 }
             }
             else
             {
-                timeWallStick = 0;
+                _timeWallStick = 0;
             }
 
-            manager.body.velocity = velocity ;
+            _manager.body.velocity = _velocity ;
                         
         }
     }

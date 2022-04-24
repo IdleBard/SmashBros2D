@@ -35,7 +35,7 @@ namespace SmashBros2D
             Debug.Log("Hurt Response " + _impulse + " : Shift " + _magnitude + " : Damage Percentage : " + _manager.damageRatio*100f + "%");
             _body.AddForce(_impulse, ForceMode2D.Impulse);
             
-            _manager.addDamage(data.attackData.damage);
+            _manager.AddDamage(data.attackData.damage);
         }
 
     }
