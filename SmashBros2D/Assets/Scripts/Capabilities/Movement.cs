@@ -1,18 +1,17 @@
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
-    [RequireComponent(typeof(Manager))]
+    [RequireComponent(typeof(PlayerManager))]
     public class Movement : MonoBehaviour
     {
-        protected Manager         manager    ;
-
-        protected Vector2         velocity   ;
+        protected PlayerManager manager  ;
+        protected Vector2       velocity ;
 
         // Start is called before the first frame update
         protected virtual void Awake()
         {
-            manager    = GetComponent<Manager>();
+            manager    = GetComponent<PlayerManager>();
         }
 
     }

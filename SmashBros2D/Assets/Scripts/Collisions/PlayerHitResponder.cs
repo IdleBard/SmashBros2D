@@ -2,7 +2,7 @@
 // using System.Collections.Generic;
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     [RequireComponent(typeof(PlayerHitbox))]
     public class PlayerHitResponder : MonoBehaviour, IHitResponder
@@ -10,14 +10,14 @@ namespace smash_bros
         [SerializeField] private bool         isAttacking = false ;
         [SerializeField] private int          damage      = 10 ;
         
-        private PlayerHitbox _hitbox  ;
-        private Manager      _manager ;
+        private PlayerHitbox  _hitbox  ;
+        private PlayerManager _manager ;
 
         int IHitResponder.Damage {get => damage; }
 
         private void Awake()
         {
-            _manager = transform.parent.GetComponent<Manager>();
+            _manager = transform.parent.GetComponent<PlayerManager>();
             _hitbox  = GetComponent<PlayerHitbox>();
         }
 

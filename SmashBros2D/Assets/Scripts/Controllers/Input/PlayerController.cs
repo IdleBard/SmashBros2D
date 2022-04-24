@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     [CreateAssetMenu(fileName = "PlayerController", menuName = "InputController/PlayerController")]
     public class PlayerController : InputController

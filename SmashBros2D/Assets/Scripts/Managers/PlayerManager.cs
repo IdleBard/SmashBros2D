@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {   
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Manager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour
     {
         [SerializeField] internal InputController input = null;
         [SerializeField] internal PlayerHitResponder hitResponder ;

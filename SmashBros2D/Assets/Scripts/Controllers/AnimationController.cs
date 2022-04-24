@@ -1,18 +1,18 @@
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     [RequireComponent(typeof(Animator))]
     public class AnimationController : MonoBehaviour
     {
-        private Manager         manager    ;
+        private PlayerManager   manager    ;
         private Animator        animator   ;
         // private SpriteRenderer  renderer   ;
 
         // Awake is called before the first frame update
         protected virtual void Awake()
         {
-            manager    = GetComponent<Manager>();
+            manager    = GetComponent<PlayerManager>();
             animator   = GetComponent<Animator>();
             // renderer   = GetComponent<SpriteRenderer>();
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     public class CameraController : MonoBehaviour
     {

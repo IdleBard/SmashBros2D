@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     [RequireComponent(typeof(PlayerHurtbox))]
     public class PlayerHurtResponder : MonoBehaviour, IHurtResponder
     {
-        [SerializeField] private Rigidbody2D   _body    ;
-        [SerializeField] private PlayerHurtbox _hurtbox ;
-        // private List<PlayerHurtbox> _hurtboxes = new List<PlayerHurtbox>();
+        private Rigidbody2D   _body    ;
+        private PlayerHurtbox _hurtbox ;
 
         private void Awake()
         {
-            // _hurtboxes = new List<PlayerHurtbox>(GetComponents<PlayerHurtbox>());
-            // foreach (PlayerHurtbox _hurtbox in _hurtboxes)
-            // {
-            //     _hurtbox.hurtResponder = this;
-            // }
             _hurtbox = GetComponent<PlayerHurtbox>();
             _hurtbox.hurtResponder = this;
             _body      = _hurtbox.owner.GetComponent<Rigidbody2D>();

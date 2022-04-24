@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     public class GroundCollision : MonoBehaviour
     {

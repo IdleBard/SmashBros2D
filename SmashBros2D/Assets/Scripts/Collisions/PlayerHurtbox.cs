@@ -2,7 +2,7 @@
 // using System.Collections.Generic;
 using UnityEngine;
 
-namespace smash_bros
+namespace SmashBros2D
 {
     public class PlayerHurtbox : MonoBehaviour, IHurtbox
     {

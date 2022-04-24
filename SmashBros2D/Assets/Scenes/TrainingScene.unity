@@ -212,30 +212,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 991289741, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 991289741, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 991289742, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: angle
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 991289742, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: distance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921343, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Size.y
-      value: 1.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727921343, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334765, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_Name
       value: Character
@@ -284,23 +260,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7913767908309700477, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-      propertyPath: hitResponder
-      value: 
-      objectReference: {fileID: 1376367515}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
---- !u!114 &1376367515 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 991289743, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
-  m_PrefabInstance: {fileID: 1306339919}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d76034a559b6d74a94ae645564c4a10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1719527664
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +410,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridBox Background
       objectReference: {fileID: 0}
+    - target: {fileID: 6940686821417935321, guid: 04698916ae343674fb65e75e7a2e3ac1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940686821417935321, guid: 04698916ae343674fb65e75e7a2e3ac1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04698916ae343674fb65e75e7a2e3ac1, type: 3}
 --- !u!1001 &8291849133668031660
@@ -505,6 +474,10 @@ PrefabInstance:
     - target: {fileID: 8291849132645407151, guid: 460fe2c4570ca3d40bc42acea4f41206, type: 3}
       propertyPath: m_Name
       value: GridBox Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291849132645407151, guid: 460fe2c4570ca3d40bc42acea4f41206, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 460fe2c4570ca3d40bc42acea4f41206, type: 3}
