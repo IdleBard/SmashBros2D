@@ -40,7 +40,7 @@ namespace SmashBros2D
                         // Generate Hitdata
                         _hitdata = new HitData
                         {
-                            damage      = _hitResponder == null ? 0 : _hitResponder.Damage,
+                            attackData  = _hitResponder == null ? null : _hitResponder.attackData,
                             hitPoint    = _hit.point == Vector2.zero ? new Vector2(transform.position.x, transform.position.y) : _hit.point,
                             hitNormal   = _hit.normal,
                             hurtbox     = _hurtbox,

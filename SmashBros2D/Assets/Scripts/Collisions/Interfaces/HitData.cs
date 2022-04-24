@@ -6,7 +6,7 @@ namespace SmashBros2D
 {
     public class HitData
     {
-        public int damage;
+        public AttackData attackData;
         
         public Vector2 hitPoint  ;
         public Vector2 hitNormal ;
@@ -52,7 +52,7 @@ namespace SmashBros2D
 
     public interface IHitResponder
     {
-        int Damage { get; }
+        public AttackData attackData { get; }
 
         public bool CheckHit(HitData data);
 

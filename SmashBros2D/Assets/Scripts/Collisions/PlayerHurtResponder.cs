@@ -26,12 +26,16 @@ namespace SmashBros2D
 
         void IHurtResponder.Response(HitData data)
         {
-            _manager.addDamage(data.damage);
-            float _magnitude = data.damage * (1 + _manager.damageRatio);
-            Vector2 _impulse = -1 * data.hitNormal * _magnitude;
-            Debug.Log("Hurt Response " + _impulse + " : Damage " + _magnitude);
+            
+            float _magnitude = data.attackData.shift * (1 + _manager.damageRatio);
+            // Vector2 _impulse = -1 * data.hitNormal * _magnitude;
+            Vector2 _impulse =  data.attackData.direction * _magnitude;
+            _impulse.x *= Mathf.Sign(-1 * data.hitNormal.x);
+
+            Debug.Log("Hurt Response " + _impulse + " : Shift " + _magnitude + " : Damage Percentage : " + _manager.damageRatio*100f + "%");
             _body.AddForce(_impulse, ForceMode2D.Impulse);
             
+            _manager.addDamage(data.attackData.damage);
         }
 
     }

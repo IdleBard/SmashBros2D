@@ -7,13 +7,13 @@ namespace SmashBros2D
     [RequireComponent(typeof(PlayerHitbox))]
     public class PlayerHitResponder : MonoBehaviour, IHitResponder
     {
-        [SerializeField] private bool         isAttacking = false ;
-        [SerializeField] private int          damage      = 10 ;
+        [SerializeField] private bool       _isAttacking = false ;
+        [SerializeField] private AttackData _attackData  = null  ;
         
         private PlayerHitbox  _hitbox  ;
         private PlayerManager _manager ;
 
-        int IHitResponder.Damage {get => damage; }
+        public AttackData attackData {get => _attackData; }
 
         private void Awake()
         {
