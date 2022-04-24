@@ -27,7 +27,7 @@ namespace SmashBros2D
         void IHurtResponder.Response(HitData data)
         {
             _manager.addDamage(data.damage);
-            float _magnitude = data.damage * (_manager.damageRatio);
+            float _magnitude = data.damage * (1 + _manager.damageRatio);
             Vector2 _impulse = -1 * data.hitNormal * _magnitude;
             Debug.Log("Hurt Response " + _impulse + " : Damage " + _magnitude);
             _body.AddForce(_impulse, ForceMode2D.Impulse);
