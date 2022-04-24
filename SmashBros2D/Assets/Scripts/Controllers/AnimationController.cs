@@ -7,36 +7,43 @@ namespace SmashBros2D
     {
         private PlayerManager   _manager    ;
         private Animator        _animator   ;
-        // private SpriteRenderer  renderer   ;
+
+        private float nextAttackTime;
 
         // Awake is called before the first frame update
-        protected virtual void Awake()
+        void Awake()
         {
             _manager    = GetComponent<PlayerManager>();
             _animator   = GetComponent<Animator>();
-            // renderer   = GetComponent<SpriteRenderer>();
+        }
+
+        void Start()
+        {
+            nextAttackTime = Time.time;
         }
 
         // Update is called once per frame
         void Update()
         {
-            _animator.SetBool("isJumping", !_manager.env.onGround);
-            _animator.SetFloat("Speed", Mathf.Abs(_manager.body.velocity.x));
-
             if (_manager.input.RetrieveMoveInput() > 0f)
             {
-                // renderer.flipX = true;
                 transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
             else if (_manager.input.RetrieveMoveInput() < 0f)
             {
-                // renderer.flipX = false;
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
-            
-            if (_manager.input.RetrieveAttackInput())
+
+            _animator.SetBool("isJumping", !( _manager.env.onGround || _manager.env.onWall ));
+            _animator.SetFloat("Speed"   , Mathf.Abs(_manager.body.velocity.x));
+
+            if (Time.time >= nextAttackTime)
             {
-                _animator.SetTrigger("isAttacking");
+                if (_manager.input.RetrieveAttackInput())
+                {
+                    _animator.SetTrigger("isAttacking");
+                    nextAttackTime = Time.time + _manager.stats.minNextAttackTime;
+                }
             }
 
         }
