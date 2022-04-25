@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenX: 0.5
   screenY: 0.5
-  xDamping: 0.2
+  xDamping: 0.4
   yDamping: 0.2
   deadZoneWidth: 0.5
   deadZoneHeight: 0.5

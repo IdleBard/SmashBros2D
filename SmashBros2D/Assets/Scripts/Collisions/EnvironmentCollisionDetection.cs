@@ -14,7 +14,7 @@ namespace SmashBros2D
         [SerializeField, Range(0f, 1f)]  private float uncertainty    =  .1f ;
 
         private EnvironmentCollision _env;
-        public EnvironmentCollision env { get => _env ; }
+        public  EnvironmentCollision env { get => _env ; }
 
         private float _minLimitGround ;
         private float _minLimitWall   ;
@@ -33,7 +33,7 @@ namespace SmashBros2D
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            env.Clear();
+            _env.Clear();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

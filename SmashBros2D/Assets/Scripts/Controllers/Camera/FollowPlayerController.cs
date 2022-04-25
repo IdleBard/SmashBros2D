@@ -8,17 +8,17 @@ namespace SmashBros2D
     {
         
         [Header("Position")]
-        [SerializeField, Range(0f, 1f)] private float   screenX      =  .5f ;
-        [SerializeField, Range(0f, 1f)] private float   screenY      =  .5f ;
+        [SerializeField, Range(0f, 1f)] private float   screenX =  .5f ;
+        [SerializeField, Range(0f, 1f)] private float   screenY =  .5f ;
         private Vector2 _screen { get => new Vector2(screenX, screenY);}
 
         [Header("Damping")]
-        [SerializeField, Range(0f,  1f)] private float   xDamping = .2f ;
-        [SerializeField, Range(0f,  1f)] private float   yDamping = .2f ;
+        [SerializeField, Range(0f,  1f)] private float xDamping = .2f ;
+        [SerializeField, Range(0f,  1f)] private float yDamping = .2f ;
 
         [Header("Dead Zone")]
-        [SerializeField, Range(.2f,  1f)] private float   deadZoneWidth  = .5f ;
-        [SerializeField, Range(.2f,  1f)] private float   deadZoneHeight = .5f ;
+        [SerializeField, Range(.2f,  1f)] private float deadZoneWidth  = .5f ;
+        [SerializeField, Range(.2f,  1f)] private float deadZoneHeight = .5f ;
         private Vector2 _relativeFocusSize { get => new Vector2(deadZoneWidth, deadZoneHeight);}
 
         // [SerializeField, Range(0f, 10f)] private float   lookAheadDstX      =  3f ;
