@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4750ffeaa64f40a458d2d9d2540488b8, type: 3}
   m_Name: FollowPlayerController
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  debugMode: 1
-  verticalOffset: 1
-  focusAreaSize: {x: 5, y: 5}
-  lookAheadDstX: 3
-  lookSmoothTimeX: 0.5
-  verticalSmoothTime: 0.2
+  screenX: 0.5
+  screenY: 0.5
+  xDamping: 0.2
+  yDamping: 0.2
+  deadZoneWidth: 0.5
+  deadZoneHeight: 0.5

@@ -9,15 +9,27 @@ namespace SmashBros2D
 
         [SerializeField] private CameraController controller = null;
         [SerializeField] private GameObject       target     = null;
+        
+        [Header("Debug Settings")]
+        [SerializeField] private bool debugMode = true;
 
         void Awake()
         {
              controller.SetTarget(target);
         }
 
-        void LateUpdate()
+        void FixedUpdate()
         {
-            transform.position = controller.Follow(transform.position);
+            Vector2 _nextPosition = controller.Follow(transform.position);
+            transform.position = new Vector3(_nextPosition.x, _nextPosition.y, transform.position.z);
+        }
+
+        void OnDrawGizmos()
+        {
+            if (debugMode)
+            {
+                controller?.OnDrawGizmos();
+            }
         }
 
     }
