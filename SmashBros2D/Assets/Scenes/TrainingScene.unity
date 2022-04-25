@@ -130,29 +130,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5870729898246849592, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
+    - target: {fileID: 3448129011944907455, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 834186875}
-    - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
-      propertyPath: debugMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
-      propertyPath: focusAreaSize.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5870729898246849594, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
-      propertyPath: focusAreaSize.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5870729898246849595, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
-      propertyPath: orthographic size
-      value: 5
+    - target: {fileID: 3448129011944907455, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 11400000, guid: ab979f5ec0599b746b288c348c2cea6d, type: 2}
+    - target: {fileID: 5870729898246849592, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 5870729898246849732, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: m_RootOrder
