@@ -12,8 +12,6 @@ namespace SmashBros2D
         private EnvironmentCollision _env;
         public  EnvironmentCollision env { get => _env ; }
 
-        internal bool isAttacking = false;
-
         // Start is called before the first frame update
         protected override void Awake()
         {
@@ -29,13 +27,6 @@ namespace SmashBros2D
                 _env = detector.env;
             }
         }
-
-        // public void Attack()
-        // {
-        //     hitResponder.Attack();
-        // }
-
-
 
     }
 }
