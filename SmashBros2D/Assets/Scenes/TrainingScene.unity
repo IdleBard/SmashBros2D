@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 3448129011944907455, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: controller
       value: 
-      objectReference: {fileID: 11400000, guid: ab979f5ec0599b746b288c348c2cea6d, type: 2}
+      objectReference: {fileID: 11400000, guid: c3adba58b9ade4c4f86888f5fab2a847, type: 2}
     - target: {fileID: 5870729898246849592, guid: 1248076d79ddd6a4d9ce1fe08788979e, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -227,6 +227,10 @@ PrefabInstance:
     - target: {fileID: 6395903948659334765, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395903948659334769, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: maxAirJumps
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_RootOrder

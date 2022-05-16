@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SmashBros2D
 {
-    [CreateAssetMenu(fileName = "AIController", menuName = "InputController/AIController")]
+    [CreateAssetMenu(fileName = "AIController", menuName = "Controller/Input/AIController")]
     public class AIController : InputController
     {
         public override float RetrieveMoveInput()

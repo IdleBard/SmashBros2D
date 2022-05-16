@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4750ffeaa64f40a458d2d9d2540488b8, type: 3}
-  m_Name: FollowPlayerController
+  m_Name: FollowSinglePlayerController
   m_EditorClassIdentifier: 
   screenX: 0.5
   screenY: 0.5
-  xDamping: 0.4
+  xDamping: 0.2
   yDamping: 0.2
   deadZoneWidth: 0.5
   deadZoneHeight: 0.5

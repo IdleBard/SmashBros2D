@@ -3,8 +3,8 @@ using System.Collections;
 
 namespace SmashBros2D
 {
-    [CreateAssetMenu(fileName = "FollowPlayerController", menuName = "CameraController/FollowPlayerController")]
-    public class FollowPlayerController : CameraController
+    [CreateAssetMenu(fileName = "FollowSinglePlayerController", menuName = "Controller/Camera/FollowSinglePlayer")]
+    public class FollowSinglePlayerController : CameraController
     {
         
         [Header("Position")]
@@ -23,7 +23,7 @@ namespace SmashBros2D
 
         // [SerializeField, Range(0f, 10f)] private float   lookAheadDstX      =  3f ;
 
-        private FocusArea   _focusArea ;
+        private SingleFocusArea   _focusArea ;
         private GameObject  _target    ;
         private Collider2D  _collider  ;
 
@@ -43,7 +43,7 @@ namespace SmashBros2D
             _target        = target;
             _collider      = _target.GetComponent<BoxCollider2D>();
 
-            _focusArea = new FocusArea  (_relativeFocusSize, _screen);
+            _focusArea = new SingleFocusArea  (_relativeFocusSize, _screen);
 
             _smoothVelocityX = 0f;
             _smoothVelocityY = 0f;
@@ -105,7 +105,7 @@ namespace SmashBros2D
         }
     }
 
-    public struct FocusArea
+    public struct SingleFocusArea
     {
         public Vector2 center         { get => new Vector2( (_left + _right)/2f , (_top + _bottom)/2f ) ; }
         public Vector2 size           { get => new Vector2( _left - _right , _top - _bottom ) ; }
@@ -116,7 +116,7 @@ namespace SmashBros2D
         private float  _left, _right  ;
         private float  _top,  _bottom ;
 
-        public FocusArea(Vector2 relativeSize , Vector2 relativeScreen)
+        public SingleFocusArea(Vector2 relativeSize , Vector2 relativeScreen)
         {
             _screen.x = (relativeScreen.x - 0.5f) * 2f * Camera.main.orthographicSize  * Camera.main.aspect;
             _screen.y = (relativeScreen.y - 0.5f) * 2f * Camera.main.orthographicSize ;
