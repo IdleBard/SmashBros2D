@@ -21,8 +21,6 @@ namespace SmashBros2D
         [SerializeField, Range(.2f,  1f)] private float deadZoneHeight = .5f ;
         private Vector2 _relativeFocusSize { get => new Vector2(deadZoneWidth, deadZoneHeight);}
 
-        // [SerializeField, Range(0f, 10f)] private float   lookAheadDstX      =  3f ;
-
         private MultiFocusArea   _focusArea ;
         private GameObject       _target    ;
         private Collider2D       _collider  ;
@@ -30,27 +28,16 @@ namespace SmashBros2D
         private float _smoothVelocityX ;
         private float _smoothVelocityY ;
 
-        // private float _currentLookAheadX   ;
-        // private float _targetLookAheadX    ;
-        // private float _lookAheadDirX       ;
-        // private float _smoothLookVelocityX ;
-        // 
-
-        // private bool _lookAheadStopped     ;
 
         public override void SetTarget(string targetTag)
         {
-            _target        = GameObject.FindWithTag(targetTag);
+            _target    = GameObject.FindWithTag(targetTag);
+            _collider  = _target?.GetComponent<Collider2D>();
 
-            if (_target == null)
-            {
-                _collider      = _target.GetComponent<BoxCollider2D>();
+            _focusArea = new MultiFocusArea (_relativeFocusSize, _screen);
 
-                _focusArea = new MultiFocusArea  (_relativeFocusSize, _screen);
-
-                _smoothVelocityX = 0f;
-                _smoothVelocityY = 0f;
-            }
+            _smoothVelocityX = 0f;
+            _smoothVelocityY = 0f;
 
         }
 
@@ -65,35 +52,6 @@ namespace SmashBros2D
             _focusArea.Update (_collider.bounds);
 
             Vector2 _focusPosition = _focusArea.cameraPosition;
-            // Vector2 _focusPosition = _focusArea.center;
-
-            // if (_focusArea.velocity.x != 0)
-            // {
-            //     _lookAheadDirX = Mathf.Sign (_focusArea.velocity.x);
-
-            //     if (Mathf.Sign(_target.transform.position.x) == Mathf.Sign(_focusArea.velocity.x) && _target.transform.position.x != 0)
-            //     {
-            //         _lookAheadStopped = false;
-            //         _targetLookAheadX = _lookAheadDirX * lookAheadDstX;
-            //     }
-            //     else
-            //     {
-            //         if (!_lookAheadStopped)
-            //         {
-            //             _lookAheadStopped = true;
-            //             _targetLookAheadX = _currentLookAheadX + (_lookAheadDirX * lookAheadDstX - _currentLookAheadX)/4f;
-            //         }
-            //     }
-            // }
-
-
-            // _currentLookAheadX = Mathf.SmoothDamp (_currentLookAheadX, _targetLookAheadX, ref _smoothLookVelocityX, horizontalSmoothTime);
-
-            // _focusPosition.y = Mathf.SmoothDamp (cameraPosition.y, _focusPosition.y, ref _smoothVelocityY, verticalSmoothTime);
-            // _focusPosition  += Vector2.right * _currentLookAheadX;
-
-            // return (Vector3)_focusPosition + Vector3.forward * -10;
-
 
             _focusPosition.x = Mathf.SmoothDamp (cameraPosition.x, _focusArea.cameraPosition.x, ref _smoothVelocityX , xDamping);
             _focusPosition.y = Mathf.SmoothDamp (cameraPosition.y, _focusArea.cameraPosition.y, ref _smoothVelocityY , yDamping);
@@ -126,6 +84,7 @@ namespace SmashBros2D
             _screen.y = (relativeScreen.y - 0.5f) * 2f * Camera.main.orthographicSize ;
 
             Vector2 _areaSize;
+
             _areaSize.x = relativeSize.x * 2f * Camera.main.orthographicSize * Camera.main.aspect;
             _areaSize.y = relativeSize.y * 2f * Camera.main.orthographicSize;
 

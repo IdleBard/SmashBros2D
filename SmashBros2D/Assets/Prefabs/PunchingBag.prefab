@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2095390566}
   m_Layer: 6
   m_Name: PunchingBag
-  m_TagString: Player
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654152750577559638, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
       propertyPath: m_TagString
-      value: PlayerModule
+      value: CharacterModule
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 559887101527889231, guid: a891386d0c1ffcf43b0ccf3521e31229, type: 3}
       propertyPath: m_TagString
-      value: PlayerModule
+      value: CharacterModule
       objectReference: {fileID: 0}
     - target: {fileID: 9156884916390943290, guid: a891386d0c1ffcf43b0ccf3521e31229, type: 3}
       propertyPath: _owner
