@@ -7,15 +7,15 @@ namespace SmashBros2D
     {
         
 
-        [SerializeField] private CameraController controller = null;
-        [SerializeField] private GameObject       target     = null;
+        [SerializeField] private CameraController controller = null     ;
+        [SerializeField] private string           targetTag  = "Player" ;
         
         [Header("Debug Settings")]
         [SerializeField] private bool debugMode = true;
 
         void Awake()
         {
-             controller.SetTarget(target);
+             controller.SetTarget(targetTag);
         }
 
         void FixedUpdate()

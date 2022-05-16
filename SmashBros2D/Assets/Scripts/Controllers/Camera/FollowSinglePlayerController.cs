@@ -24,8 +24,8 @@ namespace SmashBros2D
         // [SerializeField, Range(0f, 10f)] private float   lookAheadDstX      =  3f ;
 
         private SingleFocusArea   _focusArea ;
-        private GameObject  _target    ;
-        private Collider2D  _collider  ;
+        private GameObject        _target    ;
+        private Collider2D        _collider  ;
 
         private float _smoothVelocityX ;
         private float _smoothVelocityY ;
@@ -38,9 +38,9 @@ namespace SmashBros2D
 
         // private bool _lookAheadStopped     ;
 
-        public override void SetTarget(GameObject target)
+        public override void SetTarget(string targetTag)
         {
-            _target        = target;
+            _target        = GameObject.FindWithTag(targetTag);
             _collider      = _target.GetComponent<BoxCollider2D>();
 
             _focusArea = new SingleFocusArea  (_relativeFocusSize, _screen);
