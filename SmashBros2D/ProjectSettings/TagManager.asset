@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CharacterModule
-  - Player
+  - Character
   - AI
   layers:
   - Default
@@ -14,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Character
+  - Player
   - Ground
   - PlayerCollisionBlocker
   - Background

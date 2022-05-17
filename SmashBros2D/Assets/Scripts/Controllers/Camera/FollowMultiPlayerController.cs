@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace SmashBros2D
 {
@@ -22,39 +23,55 @@ namespace SmashBros2D
         private Vector2 _relativeFocusSize { get => new Vector2(deadZoneWidth, deadZoneHeight);}
 
         private MultiFocusArea   _focusArea ;
-        private GameObject       _target    ;
-        private Collider2D       _collider  ;
+        // private GameObject       _target    ;
+        private GameObject[]     _targets   ;
+        private List<Collider2D> _colliders ;
 
         private float _smoothVelocityX ;
         private float _smoothVelocityY ;
+        private float _smoothZoom      ;
 
 
         public override void SetTarget(string targetTag)
         {
-            _target    = GameObject.FindWithTag(targetTag);
-            _collider  = _target?.GetComponent<Collider2D>();
+            _targets    = GameObject.FindGameObjectsWithTag(targetTag);
+            _colliders  = new List<Collider2D>();
 
-            _focusArea = new MultiFocusArea (_relativeFocusSize, _screen);
+            foreach (GameObject _target in _targets)
+            {
+                Debug.Log(_target.name);
+                Collider2D _collider  = _target?.GetComponent<Collider2D>();
+
+                if (_collider != null)
+                {
+                    _colliders.Add(_collider);
+                }
+            }
+
+            _focusArea = new MultiFocusArea (_relativeFocusSize, _screen, 5f, 20f);
 
             _smoothVelocityX = 0f;
             _smoothVelocityY = 0f;
+            _smoothZoom      = 0f;
 
         }
 
 
         public override Vector2 Follow(Vector3 cameraPosition)
         {
-            if (_target == null)
+            if (_targets == null || _targets.Length == 0)
             {
                 return Vector3.zero;
             }
 
-            _focusArea.Update (_collider.bounds);
+            _focusArea.Update (_colliders);
 
             Vector2 _focusPosition = _focusArea.cameraPosition;
 
             _focusPosition.x = Mathf.SmoothDamp (cameraPosition.x, _focusArea.cameraPosition.x, ref _smoothVelocityX , xDamping);
             _focusPosition.y = Mathf.SmoothDamp (cameraPosition.y, _focusArea.cameraPosition.y, ref _smoothVelocityY , yDamping);
+
+            Camera.main.orthographicSize = Mathf.SmoothDamp (Camera.main.orthographicSize, _focusArea.cameraOrthographicSize, ref _smoothZoom , xDamping);
 
             return _focusPosition;
         }
@@ -69,66 +86,121 @@ namespace SmashBros2D
 
     public struct MultiFocusArea
     {
-        public Vector2 center         { get => new Vector2( (_left + _right)/2f , (_top + _bottom)/2f ) ; }
-        public Vector2 size           { get => new Vector2( _left - _right , _top - _bottom ) ; }
-        public Vector2 cameraPosition { get => center - _screen ; }
+        public Vector2 center         { get => new Vector2( _screenBounds.center.x , _screenBounds.center.y ) ; }
+        public Vector2 size           { get => new Vector2( _screenBounds.size.x   , _screenBounds.size.y   ) ; }
+        public Vector2 cameraPosition { get => center - _screenOffset ; }
         public Vector2 velocity ;
+        public float   cameraOrthographicSize { get => _cameraOrthographicSize ; }
+        public float   zoom ;
 
-        private Vector2 _screen ;
-        private float  _left, _right  ;
-        private float  _top,  _bottom ;
+        private Bounds  _screenBounds           ;
+        private Vector2 _relativeSize           ;
+        private Vector2 _relativeScreenOffset   ;
+        private float   _cameraOrthographicSize ;
+        private float   _minOrthographicSize    ;
+        private float   _maxOrthographicSize    ;
 
-        public MultiFocusArea(Vector2 relativeSize , Vector2 relativeScreen)
+        private Vector2 _screenOffset { get => new Vector2((_relativeScreenOffset.x - 0.5f) * 2f * Camera.main.orthographicSize * Camera.main.aspect, (_relativeScreenOffset.y - 0.5f) * 2f * Camera.main.orthographicSize) ; }
+
+
+        public MultiFocusArea(Vector2 relativeSize , Vector2 relativeScreenOffset, float minOrthographicSize, float maxOrthographicSize)
         {
-            _screen.x = (relativeScreen.x - 0.5f) * 2f * Camera.main.orthographicSize  * Camera.main.aspect;
-            _screen.y = (relativeScreen.y - 0.5f) * 2f * Camera.main.orthographicSize ;
 
-            Vector2 _areaSize;
+            _screenBounds = new Bounds(Vector3.zero, new Vector3(relativeSize.x * 2f * Camera.main.orthographicSize * Camera.main.aspect, relativeSize.y * 2f * Camera.main.orthographicSize, 0f));
 
-            _areaSize.x = relativeSize.x * 2f * Camera.main.orthographicSize * Camera.main.aspect;
-            _areaSize.y = relativeSize.y * 2f * Camera.main.orthographicSize;
+            _relativeSize           = relativeSize ;
+            _relativeScreenOffset   = relativeScreenOffset ;
+            _cameraOrthographicSize = Camera.main.orthographicSize ;
+            _minOrthographicSize    = minOrthographicSize ;
+            _maxOrthographicSize    = maxOrthographicSize ;
 
-            _left   = Camera.main.pixelRect.center.x - _areaSize.x / 2f ;
-            _right  = Camera.main.pixelRect.center.x + _areaSize.x / 2f ;
+            velocity      = Vector2.zero ;
+            zoom          = 0f           ;
 
-            _bottom = Camera.main.pixelRect.center.y - _areaSize.y / 2f;
-            _top    = Camera.main.pixelRect.center.y + _areaSize.y / 2f;
+            Debug.Log(Camera.main.pixelRect.center);
+            Debug.Log(cameraPosition);
+            Debug.Log("cameraOrthographicSize : " + cameraOrthographicSize);
+            Debug.Log("Camera.main.orthographicSize : " + Camera.main.orthographicSize);
 
-            velocity = Vector2.zero;
         }
 
-        public void Update(Bounds targetBounds)
+        public void Update(List<Collider2D> colliders)
         {
+            Bounds mergedBounds = getMergedBounds(colliders);
+            // Debug.Log("center : " + mergedBounds.center);
+            // Debug.Log("size : " + mergedBounds.size.y);
+            // Debug.Log("size : " + mergedBounds.size.x);
+            // Debug.Log("min : " + mergedBounds.min);
+            // Debug.Log("max : " + mergedBounds.max);
+
+            velocity = (Vector2) ( mergedBounds.center - _screenBounds.center );
+
+            if ( (_relativeSize.y * mergedBounds.size.y) > (_relativeSize.x *  mergedBounds.size.x  * Camera.main.aspect) )
+            {
+                _cameraOrthographicSize = mergedBounds.size.y / (_relativeSize.y * 2f);
+                zoom     = _cameraOrthographicSize - Camera.main.orthographicSize ;
+                Debug.Log("zoom : " + zoom);            }
+            else
+            {
+                _cameraOrthographicSize = mergedBounds.size.x / (_relativeSize.x * Camera.main.aspect * 2f);
+                zoom     = _cameraOrthographicSize - Camera.main.orthographicSize ;
+            }
+
+            if (_cameraOrthographicSize < _minOrthographicSize)
+            {
+                _cameraOrthographicSize = _minOrthographicSize ;
+                
+            }
+            else if (_cameraOrthographicSize > _maxOrthographicSize)
+            {
+                _cameraOrthographicSize = _maxOrthographicSize ;
+            }
+
+            _screenBounds = new Bounds(mergedBounds.center, new Vector3(_relativeSize.x * 2f * _cameraOrthographicSize * Camera.main.aspect, _relativeSize.y * 2f * _cameraOrthographicSize, 0f));
             
-            float shiftX = 0;
-            float shiftY = 0;
+            zoom     = _cameraOrthographicSize - Camera.main.orthographicSize ;
+        }
 
-            if (targetBounds.min.x < _left)
-            {
-                shiftX = targetBounds.min.x - _left;
-            }
-            else if (targetBounds.max.x > _right)
-            {
-                shiftX = targetBounds.max.x - _right;
-            }
+        private Bounds getMergedBounds(List<Collider2D> colliders)
+        {
 
-            _left  += shiftX;
-            _right += shiftX;
+            List<Bounds> _targetsBounds = new List<Bounds>() ;
+            Bounds       _mergedBounds  = new Bounds()       ;
 
-            if (targetBounds.min.y < _bottom)
+            foreach (Collider2D collider in colliders)
             {
-                shiftY = targetBounds.min.y - _bottom;
-            }
-            else if (targetBounds.max.y > _top)
-            {
-                shiftY = targetBounds.max.y - _top;
+                _targetsBounds.Add(collider.bounds);
             }
 
-            _top    += shiftY;
-            _bottom += shiftY;
+            Vector3 _min = _targetsBounds[0].min ;
+            Vector3 _max = _targetsBounds[0].max ;
 
-            // center   = new Vector2((_left+_right)/2,(_top +_bottom)/2);
-            velocity = new Vector2(shiftX, shiftY);
+            foreach(Bounds b in _targetsBounds)
+            {
+                if (b.min.x < _min.x)
+                {
+                    _min.x = b.min.x ;
+                }
+
+                if (b.max.x > _max.x)
+                {
+                    _max.x = b.max.x ;
+                }
+
+                if (b.min.y < _min.y)
+                {
+                    _min.y = b.min.y ;
+                }
+
+                if (b.max.y > _max.y)
+                {
+                    _max.y = b.max.y ;
+                }
+            }
+
+            _mergedBounds.SetMinMax(_min, _max);
+
+            return _mergedBounds;
         }
     }
 }

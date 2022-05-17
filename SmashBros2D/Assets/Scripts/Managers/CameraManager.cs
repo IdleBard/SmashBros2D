@@ -22,6 +22,7 @@ namespace SmashBros2D
         {
             Vector2 _nextPosition = controller.Follow(transform.position);
             transform.position = new Vector3(_nextPosition.x, _nextPosition.y, transform.position.z);
+
         }
 
         void OnDrawGizmos()

@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 6
-  maxAirJumps: 0
+  maxAirJumps: 1
   maxJumpBuffer: 5
   maxCoyoteTime: 5
   enableWallJump: 1
@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654152750577559638, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
       propertyPath: m_TagString
-      value: PlayerModule
+      value: CharacterModule
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c72470a7020d409b18635db04f2bd, type: 3}
@@ -509,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8216718395721710265, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
       propertyPath: m_TagString
-      value: PlayerModule
+      value: CharacterModule
       objectReference: {fileID: 0}
     - target: {fileID: 8216718395721710266, guid: ab934f7fb85774b48bdf2ccdba93eaa8, type: 3}
       propertyPath: _attackData
