@@ -32,7 +32,7 @@ namespace SmashBros2D
             Vector2 _impulse =  data.attackData.direction * _magnitude;
             _impulse.x *= Mathf.Sign(-1 * data.hitNormal.x);
 
-            Debug.Log("Hurt Response " + _impulse + " : Shift " + _magnitude + " : Damage Percentage : " + _manager.damageRatio*100f + "%");
+            // Debug.Log("Hurt Response " + _impulse + " : Shift " + _magnitude + " : Damage Percentage : " + _manager.damageRatio*100f + "%");
             _body.AddForce(_impulse, ForceMode2D.Impulse);
             
             _manager.AddDamage(data.attackData.damage);

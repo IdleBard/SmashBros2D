@@ -39,7 +39,6 @@ namespace SmashBros2D
 
             foreach (GameObject _target in _targets)
             {
-                Debug.Log(_target.name);
                 Collider2D _collider  = _target?.GetComponent<Collider2D>();
 
                 if (_collider != null)
@@ -117,21 +116,11 @@ namespace SmashBros2D
             velocity      = Vector2.zero ;
             zoom          = 0f           ;
 
-            Debug.Log(Camera.main.pixelRect.center);
-            Debug.Log(cameraPosition);
-            Debug.Log("cameraOrthographicSize : " + cameraOrthographicSize);
-            Debug.Log("Camera.main.orthographicSize : " + Camera.main.orthographicSize);
-
         }
 
         public void Update(List<Collider2D> colliders)
         {
             Bounds mergedBounds = getMergedBounds(colliders);
-            // Debug.Log("center : " + mergedBounds.center);
-            // Debug.Log("size : " + mergedBounds.size.y);
-            // Debug.Log("size : " + mergedBounds.size.x);
-            // Debug.Log("min : " + mergedBounds.min);
-            // Debug.Log("max : " + mergedBounds.max);
 
             velocity = (Vector2) ( mergedBounds.center - _screenBounds.center );
 
@@ -139,7 +128,7 @@ namespace SmashBros2D
             {
                 _cameraOrthographicSize = mergedBounds.size.y / (_relativeSize.y * 2f);
                 zoom     = _cameraOrthographicSize - Camera.main.orthographicSize ;
-                Debug.Log("zoom : " + zoom);            }
+            }
             else
             {
                 _cameraOrthographicSize = mergedBounds.size.x / (_relativeSize.x * Camera.main.aspect * 2f);

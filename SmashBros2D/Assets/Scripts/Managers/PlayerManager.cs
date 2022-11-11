@@ -5,12 +5,17 @@ namespace SmashBros2D
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerManager : CharacterManager
     {
-        
+        [SerializeField] private int _playerID = 0;
+        public int playerID { get => _playerID ; }
 
         internal EnvironmentCollisionDetection detector ;
 
         private EnvironmentCollision _env;
         public  EnvironmentCollision env { get => _env ; }
+
+        // A delegate event that will notify other scripts that subscribe to this event to run a method whenever this delegate is called.
+        public delegate void UpdateDamageText(float amount, int playerID);
+        public static event UpdateDamageText UpdateDamage;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -26,6 +31,12 @@ namespace SmashBros2D
             {
                 _env = detector.env;
             }
+        }
+
+        public override void AddDamage(float damage)
+        {
+            base.AddDamage(damage);
+            UpdateDamage(damageRatio, _playerID);
         }
 
     }

@@ -22,7 +22,7 @@ namespace SmashBros2D
         {
             if (m_hurtResponder == null)
             {
-                Debug.Log("No Responder");
+                Debug.LogWarning("No Responder");
             }
             return true;
         }

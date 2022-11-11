@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8742285673232772446}
   - component: {fileID: 8742285673232772447}
   - component: {fileID: 8742285673232772448}
-  - component: {fileID: 2095390566}
+  - component: {fileID: 8794798550010163787}
   m_Layer: 6
   m_Name: PunchingBag
   m_TagString: AI
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2095390566
+--- !u!114 &8794798550010163787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,11 +133,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8742285673232772449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33493974203d49f4a9cc9bc09dee3539, type: 3}
+  m_Script: {fileID: 11500000, guid: 758bc709052f3644e88bc0ae4c792516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 76fcd6541450e7b498d2b00931ebbe27, type: 2}
   stats: {fileID: 11400000, guid: e69a8c377791f9949b26d946feea6f13, type: 2}
+  _playerID: 1
 --- !u!1001 &93287597482288818
 PrefabInstance:
   m_ObjectHideFlags: 0

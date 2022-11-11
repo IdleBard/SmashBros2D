@@ -24,7 +24,7 @@ namespace SmashBros2D
             _receivedDamage = 0;
         }
 
-        public void AddDamage(float damage)
+        public virtual void AddDamage(float damage)
         {
             _receivedDamage += damage;
         }

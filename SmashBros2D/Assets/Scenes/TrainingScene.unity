@@ -123,6 +123,22 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &319903129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6395903948659334765, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+  m_PrefabInstance: {fileID: 1740947987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &319903135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7913767908309700477, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+  m_PrefabInstance: {fileID: 1740947987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319903129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758bc709052f3644e88bc0ae4c792516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &603673643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,6 +448,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1837619979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8794798550010163787, guid: d78247a0cde413d408aa5ca4328ad2e2, type: 3}
+  m_PrefabInstance: {fileID: 8742285673012135167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758bc709052f3644e88bc0ae4c792516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &804421379953178149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,6 +523,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35612124902361744, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00025177002
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852458885176288, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852458885176288, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852458885176288, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960786
+      objectReference: {fileID: 0}
     - target: {fileID: 2785567756691143010, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -584,6 +627,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 3183449720553235176, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: _playerManger
+      value: 
+      objectReference: {fileID: 319903135}
+    - target: {fileID: 8105194164482909438, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 319903129}
+    - target: {fileID: 8719337750514394025, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
+      propertyPath: _playerManger
+      value: 
+      objectReference: {fileID: 1837619979}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 845827aee682fe149aa748c7ad1d4040, type: 3}
 --- !u!1001 &6940686823222934708

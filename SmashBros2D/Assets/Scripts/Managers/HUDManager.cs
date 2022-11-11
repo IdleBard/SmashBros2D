@@ -6,16 +6,15 @@ namespace SmashBros2D
 {
     public class HUDManager : MonoBehaviour
     {
-        //This is a reference to the Text component on the HUD gameobject that will display how much time has passed since the level started
-        [SerializeField] private Text timeText = null;
-        //This is a float value that represents how long its been since the level started
+        [SerializeField] private Text _timeText         = null ;
+
         private float _timeInLevel;
 
         // Start is called before the first frame update
         void Start()
         {
             _timeInLevel = 0;
-            UpdateTime(_timeInLevel);
+            UpdateTimeText(_timeInLevel);
         }
 
         // Update is called once per frame
@@ -30,17 +29,17 @@ namespace SmashBros2D
             //Adds time to the timeInLevel float
             _timeInLevel += Time.deltaTime;
             
-            UpdateTime(_timeInLevel);
+            UpdateTimeText(_timeInLevel);
         }
 
-        private void UpdateTime(float timeInLevel)
+        private void UpdateTimeText(float timeInLevel)
         {   
             //Sets the text value for the timeText component to whatever the time is and whatever decimal place you want to round to
             // timeText.text = Math.Round(timeInLevel, 2).ToString();
-            int cseconds = (int)( timeInLevel * 100f % 100);
-            int seconds  = (int)( timeInLevel % 60);
-            int minutes  = (int)( timeInLevel / 60);
-            timeText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + cseconds.ToString("00");
+            int cseconds = (int)( timeInLevel * 100f % 100) ;
+            int seconds  = (int)( timeInLevel % 60) ;
+            int minutes  = (int)( timeInLevel / 60) ;
+            _timeText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + cseconds.ToString("00") ;
         }
     }
 }

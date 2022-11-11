@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PunchingBagStatistics
   m_EditorClassIdentifier: 
   _name: PunchingBag
-  _maxDamage: 10
+  _maxDamage: 200
   _maxAttackFrequency: 0.1
