@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SmashBros2D
 {  
     public class CharacterManager : MonoBehaviour
     {
-        [SerializeField] internal InputController    input = null ;
-        [SerializeField] internal PlayerStatistics   stats = null ;
+        [SerializeField] internal InputController     input = null ;
+        [SerializeField] internal CharacterStatistics stats = null ;
 
         internal Rigidbody2D                   body     ;
 

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 1020877308390935915}
   - component: {fileID: 1609421463}
   m_Layer: 6
-  m_Name: Character
+  m_Name: Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 8bd1b16722580ab48bdaf307f30963bb, type: 2}
-  stats: {fileID: 11400000, guid: e0b53336d4cec6d4087c1112cf230522, type: 2}
+  stats: {fileID: 11400000, guid: 8b9a62730e45dcf4f90d10e33ef80c23, type: 2}
 --- !u!114 &6395903948659334770
 MonoBehaviour:
   m_ObjectHideFlags: 0

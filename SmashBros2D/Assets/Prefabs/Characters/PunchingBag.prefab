@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 76fcd6541450e7b498d2b00931ebbe27, type: 2}
-  stats: {fileID: 11400000, guid: e0b53336d4cec6d4087c1112cf230522, type: 2}
+  stats: {fileID: 11400000, guid: e69a8c377791f9949b26d946feea6f13, type: 2}
 --- !u!1001 &93287597482288818
 PrefabInstance:
   m_ObjectHideFlags: 0
