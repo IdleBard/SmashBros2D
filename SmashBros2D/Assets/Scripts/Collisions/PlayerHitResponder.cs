@@ -38,13 +38,11 @@ namespace SmashBros2D
 
         public bool CheckHit(HitData data)
         {
-            // Debug.Log("PlayerHitResponder.CheckHit");
             return true;
         }
 
         public void Response(HitData data)
         {
-            // Debug.Log("PlayerHitResponder.Response");
             isAttacking = false;
         }
     }

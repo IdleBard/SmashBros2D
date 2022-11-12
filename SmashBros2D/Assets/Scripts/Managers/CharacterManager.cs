@@ -29,13 +29,14 @@ namespace SmashBros2D
             _receivedDamage += damage;
         }
 
-        public void Die(Transform spawnPoint)
+        public virtual void Die(Transform spawnPoint)
         {
-            Debug.Log("Player " + this.name + " is died.");
+            Debug.Log("Player " + this.name + " is dead.");
             body.velocity = Vector2.zero;
-            transform.position = spawnPoint.position;
-            _receivedDamage = 0;
-            Debug.Log("Player respawn : " + new Vector2(transform.position.x, transform.position.y) );
+            
+            // Debug.Log("Player respawn : " + new Vector2(transform.position.x, transform.position.y) );
+            // transform.position = spawnPoint.position;
+            // _receivedDamage = 0;
         }
     }
 

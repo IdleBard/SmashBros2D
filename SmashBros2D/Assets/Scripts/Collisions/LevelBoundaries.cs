@@ -21,11 +21,8 @@ namespace SmashBros2D
 
         void OnTriggerExit2D(Collider2D collider)
         {
-            Debug.Log("Exit " + collider.tag);
-
             if (collider.tag == "Player")
             {
-                Debug.Log("Player " + collider.gameObject);
                 CharacterManager _manager = collider.gameObject.GetComponent<CharacterManager>();
                 _manager.Die(spawnPoint);
             }

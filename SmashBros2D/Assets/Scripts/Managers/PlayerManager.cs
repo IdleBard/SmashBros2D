@@ -33,9 +33,21 @@ namespace SmashBros2D
             }
         }
 
+
         public override void AddDamage(float damage)
         {
             base.AddDamage(damage);
+            UpdateDamage(damageRatio, _playerID);
+        }
+
+
+        public override void Die(Transform spawnPoint)
+        {
+            base.Die(spawnPoint);
+            
+            Debug.Log("Player respawn : " + new Vector2(transform.position.x, transform.position.y) );
+            transform.position = spawnPoint.position;
+            _receivedDamage = 0;
             UpdateDamage(damageRatio, _playerID);
         }
 
