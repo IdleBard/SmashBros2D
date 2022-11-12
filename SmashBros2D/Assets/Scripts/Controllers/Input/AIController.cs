@@ -10,6 +10,11 @@ namespace SmashBros2D
             return 1f;
         }
 
+        public override bool  RetrieveFallInput()
+        {
+            return true;
+        }
+
         public override bool RetrieveJumpInput()
         {
             return true;

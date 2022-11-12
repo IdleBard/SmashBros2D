@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8654152750577559633}
   - component: {fileID: 8654152750577559634}
   - component: {fileID: 8654152750577559635}
-  - component: {fileID: 8654152750577559632}
+  - component: {fileID: 2139340331657379544}
   m_Layer: 8
   m_Name: PlayerCollisionBlocker
   m_TagString: Player
@@ -70,7 +70,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &8654152750577559632
+--- !u!114 &2139340331657379544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,6 +79,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8654152750577559638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: def8d8a0bc1955146a48bdce8a30d684, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dc7572e77e0dba4595595629307dfb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8216718395721710264}
-  - component: {fileID: 8216718395721710266}
-  - component: {fileID: 8216718395721710267}
+  - component: {fileID: 3158459303863737698}
+  - component: {fileID: 7834115718149606079}
   m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8216718395721710266
+--- !u!114 &3158459303863737698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8216718395721710265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d76034a559b6d74a94ae645564c4a10, type: 3}
+  m_Script: {fileID: 11500000, guid: 138755a16093c9641948f54a72939217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttacking: 0
-  damage: 10
---- !u!114 &8216718395721710267
+  _attackData: {fileID: 11400000, guid: f1ec12b5f71fbd343bfc6533f4a5e80b, type: 2}
+--- !u!114 &7834115718149606079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,14 +54,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8216718395721710265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6a3c146d7350e4cbfc6e505adde5a1, type: 3}
+  m_Script: {fileID: 11500000, guid: e9ce9661f37e8e8428f960456a3e26c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.25
+  radius: 0.5
   distance: 0.5
   angle: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64
   hurtboxMask: 2
-  debugMode: 1
+  debugMode: 0

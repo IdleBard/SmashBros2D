@@ -23,17 +23,15 @@ namespace SmashBros2D
 
         void Awake()
         {
-            _playerNameText.text = _playerManger.stats.name ;
+            _playerNameText.text = _playerManger.stats.characterName ;
             _playerID            = _playerManger.playerID   ;
         }
         
         // Start is called before the first frame update
         void Start()
         {
-            
-            UpdateDamageText(0f, _playerID);
-
             PlayerManager.UpdateDamage += UpdateDamageText;
+            UpdateDamageText(0f, _playerID);
         }
         
         private void UpdateDamageText(float amount, int playerID)

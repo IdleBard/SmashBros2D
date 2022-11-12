@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SmashBros2D
 {
-    public class EnvironmentCollisionDetection : MonoBehaviour
+    public class PlayerCollisionDetection : MonoBehaviour
     {
         // [Header("Layers")]
         // public LayerMask groundLayer;
@@ -13,8 +13,8 @@ namespace SmashBros2D
         [SerializeField, Range(0f, 90f)] private float maxWallAngle   = 90f  ;
         [SerializeField, Range(0f, 1f)]  private float uncertainty    =  .1f ;
 
-        private EnvironmentCollision _env;
-        public  EnvironmentCollision env { get => _env ; }
+        private PlayerCollision _env ;
+        public  PlayerCollision env { get => _env ; }
 
         private float _minLimitGround ;
         private float _minLimitWall   ;
@@ -79,7 +79,7 @@ namespace SmashBros2D
     }
 
     
-    public struct EnvironmentCollision
+    public struct PlayerCollision
     {
         public bool  onGround    ;
         public float friction    ;

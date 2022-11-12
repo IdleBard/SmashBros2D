@@ -10,6 +10,11 @@ namespace SmashBros2D
             return Input.GetAxisRaw("Horizontal");
         }
 
+        public override bool  RetrieveFallInput()
+        {
+            return Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") < 0f;
+        }
+
         public override bool RetrieveJumpInput()
         {
             return Input.GetButtonDown("Jump");

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 559887101527889228}
   - component: {fileID: 559887101527889229}
-  - component: {fileID: 6641568861491487657}
-  - component: {fileID: 9156884916390943290}
+  - component: {fileID: 2568291501845976186}
+  - component: {fileID: 3094274822072972934}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -49,7 +49,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &6641568861491487657
+--- !u!114 &2568291501845976186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,23 +58,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 559887101527889231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdece680596d1784eab4a9413218a29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _body: {fileID: 0}
-  _hurtbox: {fileID: 0}
---- !u!114 &9156884916390943290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559887101527889231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbaee456877522947b2901d5e218d10a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0d5431ebf248614a9b0ba104d5751a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _active: 1
   _owner: {fileID: 0}
   _hurtboxType: 2
+--- !u!114 &3094274822072972934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559887101527889231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9dfb568038e71438a9356ba5820821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

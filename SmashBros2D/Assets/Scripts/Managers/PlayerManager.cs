@@ -2,16 +2,16 @@ using UnityEngine;
 
 namespace SmashBros2D
 {   
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerCollisionDetection))]
     public class PlayerManager : CharacterManager
     {
         [SerializeField] private int _playerID = 0;
         public int playerID { get => _playerID ; }
 
-        internal EnvironmentCollisionDetection detector ;
+        internal PlayerCollisionDetection detector ;
 
-        private EnvironmentCollision _env;
-        public  EnvironmentCollision env { get => _env ; }
+        private PlayerCollision _env;
+        public  PlayerCollision env { get => _env ; }
 
         // A delegate event that will notify other scripts that subscribe to this event to run a method whenever this delegate is called.
         public delegate void UpdateDamageText(float amount, int playerID);
@@ -21,7 +21,7 @@ namespace SmashBros2D
         protected override void Awake()
         {
             base.Awake();
-            detector   = GetComponent<EnvironmentCollisionDetection>();
+            detector   = GetComponent<PlayerCollisionDetection>();
         }
 
         // Update is called once per frame

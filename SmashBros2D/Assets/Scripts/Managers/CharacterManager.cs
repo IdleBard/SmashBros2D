@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace SmashBros2D
 {  
+    [RequireComponent(typeof(Rigidbody2D))]
     public class CharacterManager : MonoBehaviour
     {
         [SerializeField] internal InputController     input = null ;
@@ -33,10 +34,6 @@ namespace SmashBros2D
         {
             Debug.Log("Player " + this.name + " is dead.");
             body.velocity = Vector2.zero;
-            
-            // Debug.Log("Player respawn : " + new Vector2(transform.position.x, transform.position.y) );
-            // transform.position = spawnPoint.position;
-            // _receivedDamage = 0;
         }
     }
 
