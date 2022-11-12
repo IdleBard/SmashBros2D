@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CharacterModule
-  - Character
-  - AI
+  - CPU
+  - Platform
   layers:
   - Default
   - TransparentFX

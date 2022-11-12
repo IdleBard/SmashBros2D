@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SmashBros2D
@@ -12,6 +13,10 @@ namespace SmashBros2D
         [SerializeField, Range(0f, 90f)] private float minWallAngle   = 75f  ;
         [SerializeField, Range(0f, 90f)] private float maxWallAngle   = 90f  ;
         [SerializeField, Range(0f, 1f)]  private float uncertainty    =  .1f ;
+
+        [Header("Platform Settings")]
+        [SerializeField] private LayerMask    _platformLayerMask ;
+        [SerializeField] private List<string> _platformTagMask   ;
 
         private PlayerCollision _env ;
         public  PlayerCollision env { get => _env ; }
@@ -62,6 +67,16 @@ namespace SmashBros2D
 
             }
 
+            if (_env.onGround && IsPlatform(collision.gameObject))
+            {
+                _env.platformVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity ;
+                Debug.Log(_env.platformVelocity);
+            }
+            else
+            {
+                _env.platformVelocity = Vector2.zero ;
+            }
+
             _env.wallSide = _env.onRightWall ? -1 : 1;
         }
 
@@ -76,6 +91,11 @@ namespace SmashBros2D
                 _env.friction = material.friction;
             }
         }
+
+        private bool IsPlatform(GameObject gameObject)
+        {
+            return (_platformLayerMask.value & (1 << gameObject.layer)) > 0 && _platformTagMask.Contains(gameObject.tag);
+        }
     }
 
     
@@ -84,6 +104,8 @@ namespace SmashBros2D
         public bool  onGround    ;
         public float friction    ;
 
+        public Vector2 platformVelocity ;
+
         public bool  onWall      ;
         public bool  onRightWall ;
         public bool  onLeftWall  ;
@@ -91,6 +113,7 @@ namespace SmashBros2D
 
         public void Clear()
         {
+            platformVelocity = Vector2.zero ;
             onGround    = false;
             friction = 0;
 

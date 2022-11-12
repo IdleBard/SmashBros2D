@@ -10,9 +10,10 @@ namespace SmashBros2D
         private const float _ROTOFFDOWN = 180f ;
 
         [Header("Movement Settings")]
-        [SerializeField] private bool      _isMoving  = false ;
-        [SerializeField] private Transform _endPoint  = null  ;
-        [SerializeField, Range(0f, 5f)] private float _endTime  = 5f;
+        [SerializeField] private bool            _isMoving  = false ;
+        [SerializeField] private List<Transform> _positions = null  ;
+        [SerializeField, Range(0f, 5f)] private float _maxSpeed         = 5f;
+        // [SerializeField, Range(0f, 5f)] private float _maxAcceleration  = 5f;
         
         [Header("One Way Settings")]
         [SerializeField] private bool _useOneWay      = false ;
@@ -25,11 +26,15 @@ namespace SmashBros2D
         private PlatformEffector2D         _effector ;
         private PlatformCollisionDetection _detector ;
 
-        private Vector2 _startPoint ;
-        private Vector2 _lastPoint  ;
-        private Vector2 _nextPoint  ;
+        // Movement properties
+        private int     _nextPosIndex ;
+        private float   _time      ;
+        private Vector2 _lastPoint ;
+        private Vector2 _nextPoint ;
 
-        private float _time                  = 0f    ;
+        private float   _distance  { get => Vector2.Distance(_lastPoint,_nextPoint) ; }
+        private Vector2 _direction { get => (_nextPoint - _lastPoint) / _distance ; }
+        private int   _posNumber { get => _positions.Count ; }
 
         void Awake()
         {
@@ -42,10 +47,27 @@ namespace SmashBros2D
         // Start is called before the first frame update
         void Start()
         {
-            // Moving Platform Init
-            _startPoint = this.transform.position ;
-            _lastPoint  = _startPoint ;
-            _nextPoint  = _endPoint.position   ;
+            if (_isMoving)
+            {
+                Debug.Assert( _posNumber > 1, "Error : moving platform has not enough position points.");
+
+                // Moving Platform Init
+                _lastPoint  = this.transform.position ;
+
+                if (this.transform.position == _positions[0].position)
+                {  
+                    _nextPosIndex  = 1 ;
+                    _nextPoint = _positions[1].position ;
+                }
+                else
+                {
+                    _nextPosIndex  = 0 ;
+                    _nextPoint = _positions[0].position ;
+                }
+
+                _time = 0f;
+            }
+
             
             // One Way Platform Init
             _effector.useOneWay    = _useOneWay ;
@@ -73,21 +95,23 @@ namespace SmashBros2D
         {
             if (_isMoving)
             {
-                _time += Time.fixedDeltaTime;
-
-                if (_time <= _endTime)
-                {
-                    this._body.MovePosition( Vector2.Lerp(_lastPoint, _nextPoint, _time/_endTime ) );
-                }
-                else
-                {
-                    Vector2 tmp = _lastPoint ;
-                    _lastPoint = _nextPoint;
-                    _nextPoint = tmp;
-
-                    _time = 0f;
-                }
+                MovePlatform();
             }
+        }
+
+        private void MovePlatform()
+        {
+            if  (Vector3.Distance(this.transform.position, _positions[_nextPosIndex].position) <= 1E03 * Vector3.kEpsilon)
+            {
+                _lastPoint = _nextPoint ;
+                _nextPosIndex = (_nextPosIndex + 1) % _posNumber ;
+                _nextPoint = _positions[_nextPosIndex].position ;
+
+                _time = 0f;
+            }
+            
+            _time += Time.fixedDeltaTime ;
+            this._body.velocity = (Vector2.Lerp(_lastPoint, _nextPoint, _time * _maxSpeed / _distance ) - (Vector2)this.transform.position) / Time.fixedDeltaTime ;
         }
 
         private void PlayerFallThrough(int playerID)

@@ -313,6 +313,11 @@ MonoBehaviour:
   minWallAngle: 75
   maxWallAngle: 90
   uncertainty: 0.1
+  _platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _platformTagMask:
+  - Platform
 --- !u!114 &7620947200569518814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,10 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fef3d96413b2014a902ce2d5be717b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  maxAcceleration: 35
-  maxAirAcceleration: 35
-  maxTimeWallStick: 0.1
+  _maxSpeed: 6
+  _maxAcceleration: 35
+  _maxAirAcceleration: 20
+  _maxTimeWallStick: 0.1
 --- !u!114 &7118183443239243804
 MonoBehaviour:
   m_ObjectHideFlags: 0

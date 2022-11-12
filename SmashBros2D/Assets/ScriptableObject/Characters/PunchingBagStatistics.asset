@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a4c1a4499102a47a8712279471fd92, type: 3}
   m_Name: PunchingBagStatistics
   m_EditorClassIdentifier: 
-  _name: PunchingBag
+  _characterName: Punching Bag
   _maxDamage: 200
   _maxAttackFrequency: 0.1

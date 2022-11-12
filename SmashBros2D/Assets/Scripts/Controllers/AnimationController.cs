@@ -35,7 +35,7 @@ namespace SmashBros2D
             }
 
             _animator.SetBool("isJumping", !( _manager.env.onGround || _manager.env.onWall ));
-            _animator.SetFloat("Speed"   , Mathf.Abs(_manager.body.velocity.x));
+            _animator.SetFloat("Speed"   , Mathf.Abs(_manager.input.RetrieveMoveInput()));
 
             if (Time.time >= nextAttackTime)
             {
