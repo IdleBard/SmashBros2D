@@ -55,5 +55,10 @@ namespace SmashBros2D
                 
             }
         }
+
+        private void OnDestroy()
+        {
+            PlayerManager.UpdateDamage -= UpdateDamageText;
+        }
     }
 }
