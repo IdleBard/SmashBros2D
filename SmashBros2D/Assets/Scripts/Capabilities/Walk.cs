@@ -15,24 +15,28 @@ namespace SmashBros2D
 
         private float _timeWallStick;
 
-        private Vector2 direction       ;
-        private Vector2 desiredVelocity ;
+        private Vector2 _direction        ;
+        private Vector2 _desiredVelocity  ;
         
         // Update is called once per frame
         private void Update()
         {
-            direction.x     = _manager.input.RetrieveMoveInput();
-            desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(_maxSpeed - _manager.env.friction, 0f);
+            _direction.x     = _manager.input.RetrieveMoveInput();
+            _desiredVelocity = new Vector2(_direction.x, 0f) * Mathf.Max(_maxSpeed - _manager.env.friction, 0f);
         }
 
         // FixedUpdate is called every fixed frame-rate frame
         private void FixedUpdate()
         {
             _velocity = _manager.body.velocity;
+            if (_manager.env.onPlatform)
+            {
+                _velocity.x -= _manager.env.platformVelocity.x ;
+            }
 
             float acceleration   = _manager.env.onGround ? _maxAcceleration : _maxAirAcceleration;
             float maxSpeedChange = acceleration * Time.fixedDeltaTime;
-            _velocity.x     = Mathf.MoveTowards(_velocity.x, desiredVelocity.x + _manager.env.platformVelocity.x, maxSpeedChange);
+            _velocity.x     = Mathf.MoveTowards(_velocity.x, _desiredVelocity.x, maxSpeedChange);
 
             if (_manager.env.onWall)
             {
@@ -47,7 +51,11 @@ namespace SmashBros2D
                 _timeWallStick = 0;
             }
 
-            _manager.body.velocity = _velocity ;
+            if (_manager.env.onPlatform)
+            {
+                _velocity.x      += _manager.env.platformVelocity.x ;
+            }
+            _manager.body.velocity = _velocity    ;
                         
         }
     }

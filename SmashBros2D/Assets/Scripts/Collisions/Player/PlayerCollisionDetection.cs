@@ -67,7 +67,9 @@ namespace SmashBros2D
 
             }
 
-            if (_env.onGround && IsPlatform(collision.gameObject))
+            _env.onPlatform = _env.onGround && IsPlatform(collision.gameObject) ;
+
+            if (_env.onPlatform)
             {
                 _env.platformVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity ;
                 Debug.Log(_env.platformVelocity);
@@ -104,6 +106,7 @@ namespace SmashBros2D
         public bool  onGround    ;
         public float friction    ;
 
+        public bool    onPlatform       ;
         public Vector2 platformVelocity ;
 
         public bool  onWall      ;
@@ -113,9 +116,11 @@ namespace SmashBros2D
 
         public void Clear()
         {
-            platformVelocity = Vector2.zero ;
-            onGround    = false;
+            onGround    = false ;
             friction = 0;
+
+            onPlatform  = false ;
+            platformVelocity = Vector2.zero ;
 
             onWall      = false;
             onRightWall = false;

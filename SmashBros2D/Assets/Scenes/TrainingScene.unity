@@ -356,6 +356,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 6395903948659334769, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: jumpHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395903948659334769, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: maxCoyoteTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395903948659334769, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
+      propertyPath: maxJumpBuffer
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6395903948659334771, guid: 6a78e9b45d2293546a0d723dc778a133, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -629,6 +641,10 @@ PrefabInstance:
     - target: {fileID: 1439890289446712629, guid: 50d21172be8e1dc46958206d500ee576, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439890289858846175, guid: 50d21172be8e1dc46958206d500ee576, type: 3}
+      propertyPath: _maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d21172be8e1dc46958206d500ee576, type: 3}

@@ -51,6 +51,10 @@ namespace SmashBros2D
             _oldWallSide = _manager.env.wallSide;          
 
             _velocity = _manager.body.velocity;
+            if (_manager.env.onPlatform)
+            {
+                _velocity.y -= _manager.env.platformVelocity.y ;
+            }
 
             if (_manager.env.onGround)
             {
@@ -103,6 +107,10 @@ namespace SmashBros2D
                 _manager.body.gravityScale = defaultGravityScale;
             }
 
+            if (_manager.env.onPlatform)
+            {
+                _velocity.y += _manager.env.platformVelocity.y ;
+            }
             _manager.body.velocity = _velocity;
         }
 
